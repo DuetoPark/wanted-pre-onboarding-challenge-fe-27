@@ -31,6 +31,13 @@ function App() {
       </p>
       <Link to="/">홈</Link>
       <Link to="/auth">로그인</Link>
+      <button
+        onClick={() => {
+          window.localStorage.removeItem("token");
+        }}
+      >
+        로그아웃
+      </button>
     </>
   );
 }

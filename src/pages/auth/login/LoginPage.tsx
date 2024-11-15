@@ -1,7 +1,7 @@
-import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import { axiosRequest } from "../../../apis/axios/request";
 
 interface AuthSchema {
   email: string;
@@ -14,7 +14,7 @@ const LoginPage = () => {
   const [loginError, setLoginError] = useState<string>("");
 
   const login = ({ email, password }: AuthSchema) => {
-    axios
+    axiosRequest
       .post(`${import.meta.env.VITE_BASE_URL}/users/login`, {
         email,
         password,

@@ -1,18 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { logout } from "../../apis/auth";
 import { useAuthStore } from "../../store/authStore";
 
 const Gnb = () => {
-  const [userToken, setUserToken] = useState<string>("");
-  const { setToken } = useAuthStore();
+  const { token, setToken } = useAuthStore();
+
+  const onLogout = () => {
+    logout();
+    setToken(null);
+  };
 
   useEffect(() => {
     if (
       window.localStorage.getItem("token") &&
       window.localStorage.getItem("token") !== ""
     ) {
-      setUserToken(window.localStorage.getItem("token"));
       setToken(window.localStorage.getItem("token"));
     }
   }, []);
@@ -26,12 +29,12 @@ const Gnb = () => {
       <nav>
         <h2>메뉴</h2>
         <ul>
-          {userToken && (
+          {token && (
             <li>
-              <button onClick={() => logout()}>로그아웃</button>
+              <button onClick={onLogout}>로그아웃</button>
             </li>
           )}
-          {!userToken && (
+          {!token && (
             <li>
               <Link to="/auth">로그인</Link>
             </li>

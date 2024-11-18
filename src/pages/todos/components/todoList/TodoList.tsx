@@ -14,7 +14,7 @@ interface TodoType {
 
 const TodoList = () => {
   const { setMode } = useTodoStore();
-  const [todoList, setTodoList] = useState<TodoType[] | null>(null);
+  const [todos, setTodos] = useState<TodoType[] | null>(null);
   const { token } = useAuthStore();
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const TodoList = () => {
         headers: { Authorization: token },
       })
       .then((res) => {
-        setTodoList(res.data.data);
+        setTodos(res.data.data);
       });
   }, []);
 
@@ -34,9 +34,9 @@ const TodoList = () => {
       <button onClick={() => setMode("new")}>일정 추가</button>
 
       <ol>
-        {todoList?.map((item) => (
-          <li key={item.id}>
-            <Link to={`/todo/${item.id}`}>{item.title}</Link>
+        {todos?.map((todo) => (
+          <li key={todo.id}>
+            <Link to={`/todo/${todo.id}`}>{todo.title}</Link>
           </li>
         ))}
       </ol>

@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuthStore } from "../../store/authStore";
 
@@ -7,9 +7,18 @@ interface AuthCheckerPropsType {
 }
 
 const AuthChecker = ({ children }: AuthCheckerPropsType) => {
-  const { token } = useAuthStore();
+  const { setToken } = useAuthStore();
 
-  if (!window.localStorage.getItem("token") || !token) {
+  useEffect(() => {
+    if (
+      window.localStorage.getItem("token") &&
+      window.localStorage.getItem("token") !== ""
+    ) {
+      setToken(window.localStorage.getItem("token"));
+    }
+  }, []);
+
+  if (!window.localStorage.getItem("token")) {
     if (window.confirm("로그인을 해주세용")) {
       return <Navigate to="/auth" replace />;
     } else {

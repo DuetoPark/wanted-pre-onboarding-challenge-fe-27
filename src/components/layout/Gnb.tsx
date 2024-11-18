@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { logout } from "../../apis/auth";
+import { useAuthStore } from "../../store/authStore";
 
 const Gnb = () => {
   const [userToken, setUserToken] = useState<string>("");
+  const { setToken } = useAuthStore();
 
   useEffect(() => {
     if (
@@ -11,6 +13,7 @@ const Gnb = () => {
       window.localStorage.getItem("token") !== ""
     ) {
       setUserToken(window.localStorage.getItem("token"));
+      setToken(window.localStorage.getItem("token"));
     }
   }, []);
 

@@ -5,12 +5,14 @@ import LoginPage from "./pages/auth/login/LoginPage";
 import App from "./App";
 import NotFound from "./pages/error/NotFound";
 import AuthChecker from "./components/container/AuthChecker";
+import Gnb from "./components/layout/Gnb";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <AuthChecker>
+        <Gnb />
         <App />
       </AuthChecker>
     ),

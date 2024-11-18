@@ -1,5 +1,6 @@
 import TodoList from "./components/todoList/TodoList";
 import TodoDetail from "./components/todoDetail/TodoDetail";
+import TodoForm from "./components/todoForm/TodoForm";
 
 const TodosLayout = () => {
   return (
@@ -8,6 +9,7 @@ const TodosLayout = () => {
 
       <TodoList />
       <TodoDetail />
+      <TodoForm />
     </div>
   );
 };

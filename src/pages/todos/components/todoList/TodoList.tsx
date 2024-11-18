@@ -1,10 +1,7 @@
-import { useEffect, useState } from "react";
 import { useTodoStore } from "../../../../store/todoStore";
-import axios from "axios";
-import { useAuthStore } from "../../../../store/authStore";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
-interface TodoType {
+export interface TodoType {
   title: string;
   content: string;
   id: string;
@@ -14,31 +11,22 @@ interface TodoType {
 
 const TodoList = () => {
   const { setMode } = useTodoStore();
-  const [todos, setTodos] = useState<TodoType[] | null>(null);
-  const { token } = useAuthStore();
-
-  useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BASE_URL}/todos`, {
-        headers: { Authorization: token },
-      })
-      .then((res) => {
-        setTodos(res.data.data);
-      });
-  }, []);
+  const todos = useLoaderData() as TodoType[] | null;
 
   return (
     <section>
-      <h3>TodoList</h3>
-
-      <button onClick={() => setMode("new")}>일정 추가</button>
+      <header>
+        <h3>TodoList</h3>
+        <button onClick={() => setMode("new")}>일정 추가</button>
+      </header>
 
       <ol>
-        {todos?.map((todo) => (
-          <li key={todo.id}>
-            <Link to={`/todo/${todo.id}`}>{todo.title}</Link>
-          </li>
-        ))}
+        {todos &&
+          todos?.map((todo) => (
+            <li key={todo.id}>
+              <Link to={`/todo/${todo.id}`}>{todo.title}</Link>
+            </li>
+          ))}
       </ol>
     </section>
   );

@@ -7,6 +7,8 @@ import NotFound from "./pages/error/NotFound";
 import AuthChecker from "./components/container/AuthChecker";
 import Gnb from "./components/layout/Gnb";
 import TodosLayout from "./pages/todos/TodosLayout";
+import axios from "axios";
+import { TodoType } from "./pages/todos/components/todoList/TodoList";
 
 export const router = createBrowserRouter([
   {
@@ -40,6 +42,7 @@ export const router = createBrowserRouter([
         <TodosLayout />
       </AuthChecker>
     ),
+    loader: todosLoader,
   },
   {
     path: "/todo/:todoId",
@@ -48,5 +51,18 @@ export const router = createBrowserRouter([
         <TodosLayout />
       </AuthChecker>
     ),
+    loader: todosLoader,
   },
 ]);
+
+async function todosLoader(): Promise<TodoType[] | null> {
+  const token = window.localStorage.getItem("token");
+
+  return token
+    ? await axios
+        .get(`${import.meta.env.VITE_BASE_URL}/todos`, {
+          headers: { Authorization: token },
+        })
+        .then((res) => res.data.data)
+    : null;
+}

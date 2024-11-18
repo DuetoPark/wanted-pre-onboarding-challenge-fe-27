@@ -33,6 +33,9 @@ const Gnb = () => {
               <Link to="/auth">로그인</Link>
             </li>
           )}
+          <li>
+            <Link to="/todo">투두 리스트</Link>
+          </li>
         </ul>
       </nav>
     </header>

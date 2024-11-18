@@ -6,15 +6,16 @@ import App from "./App";
 import NotFound from "./pages/error/NotFound";
 import AuthChecker from "./components/container/AuthChecker";
 import Gnb from "./components/layout/Gnb";
+import TodosLayout from "./pages/todos/TodosLayout";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <AuthChecker>
+      <>
         <Gnb />
         <App />
-      </AuthChecker>
+      </>
     ),
     errorElement: <NotFound />,
   },
@@ -31,5 +32,21 @@ export const router = createBrowserRouter([
         element: <JoinPage />,
       },
     ],
+  },
+  {
+    path: "/todo",
+    element: (
+      <AuthChecker>
+        <TodosLayout />
+      </AuthChecker>
+    ),
+  },
+  {
+    path: "/todo/:todoId",
+    element: (
+      <AuthChecker>
+        <TodosLayout />
+      </AuthChecker>
+    ),
   },
 ]);

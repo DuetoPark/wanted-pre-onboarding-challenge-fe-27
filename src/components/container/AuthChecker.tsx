@@ -9,6 +9,8 @@ const AuthChecker = ({ children }: AuthCheckerPropsType) => {
   if (!window.localStorage.getItem("token")) {
     if (window.confirm("로그인을 해주세용")) {
       return <Navigate to="/auth" replace />;
+    } else {
+      return <Navigate to="/" replace />;
     }
   }
 

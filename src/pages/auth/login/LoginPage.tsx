@@ -1,34 +1,23 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
-import { axiosRequest } from "../../../apis/axios/request";
-
-interface AuthSchema {
-  email: string;
-  password: string;
-}
+import { Link } from "react-router-dom";
+import { afterLogin, AuthPayloadType, postLogin } from "../../../apis/auth";
 
 const LoginPage = () => {
-  const { register, handleSubmit, reset } = useForm<AuthSchema>();
-  const navigate = useNavigate();
+  const { register, handleSubmit, reset } = useForm<AuthPayloadType>();
   const [loginError, setLoginError] = useState<string>("");
 
-  const login = ({ email, password }: AuthSchema) => {
-    axiosRequest
-      .post(`${import.meta.env.VITE_BASE_URL}/users/login`, {
-        email,
-        password,
-      })
+  const login = useCallback(({ email, password }: AuthPayloadType) => {
+    postLogin({ email, password })
       .then((res) => res.data)
       .then((data) => {
-        window.localStorage.setItem("token", data.token);
+        afterLogin(data.token);
         reset();
-        navigate("/");
       })
       .catch((error) => {
         setLoginError(error.response.data.details);
       });
-  };
+  }, []);
 
   return (
     <section>

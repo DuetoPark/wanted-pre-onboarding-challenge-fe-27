@@ -1,21 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { z } from "zod";
-
-const EmailSchema = z.string().email({ message: "Invalid email address" });
-const PasswordSchema = z
-  .string()
-  .min(8, { message: "Must be 8 or more characters long" });
-
-const authSchema = z.object({
-  email: EmailSchema,
-  password: PasswordSchema,
-});
-
-type AuthSchema = z.infer<typeof authSchema>;
+import { afterJoin, AuthPayloadType, postJoin } from "../../../apis/auth";
+import { authSchema } from "../../../schema/auth";
 
 const JoinPage = () => {
   const {
@@ -23,30 +10,24 @@ const JoinPage = () => {
     handleSubmit,
     reset,
     formState: { errors, isValid, isDirty },
-  } = useForm<AuthSchema>({ resolver: zodResolver(authSchema) });
-  const navigate = useNavigate();
+  } = useForm<AuthPayloadType>({ resolver: zodResolver(authSchema) });
   const [joinError, setJoinError] = useState<string>("");
 
-  const join = ({ email, password }: AuthSchema) => {
-    axios
-      .post(`${import.meta.env.VITE_BASE_URL}/users/create`, {
-        email,
-        password,
-      })
+  const join = useCallback(({ email, password }: AuthPayloadType) => {
+    postJoin({ email, password })
       .then((res) => res.data)
       .then(() => {
+        afterJoin();
         reset();
-        navigate("/auth");
       })
       .catch((error) => {
-        console.log(error);
         setJoinError(error.response.data.details);
 
         if (error.response.status === 409) {
           reset();
         }
       });
-  };
+  }, []);
 
   return (
     <section>

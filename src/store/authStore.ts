@@ -6,6 +6,6 @@ type Store = {
 };
 
 export const useAuthStore = create<Store>()((set) => ({
-  token: null,
+  token: window.localStorage.getItem("token") || null,
   setToken: (newToken) => set(() => ({ token: newToken })),
 }));

@@ -1,5 +1,5 @@
 import { useTodoStore } from "../../../../store/todoStore";
-import { Link, useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 
 export interface TodoType {
   title: string;
@@ -12,19 +12,30 @@ export interface TodoType {
 const TodoList = () => {
   const { setMode } = useTodoStore();
   const todos = useLoaderData() as TodoType[] | null;
+  const navigate = useNavigate();
+
+  const goToDetail = (id: string) => {
+    setMode("read");
+    navigate(`/todo/${id}`);
+  };
+
+  const goToNew = () => {
+    setMode("new");
+    navigate("/todo/new");
+  };
 
   return (
     <section>
       <header>
         <h3>TodoList</h3>
-        <button onClick={() => setMode("new")}>일정 추가</button>
+        <button onClick={goToNew}>일정 추가</button>
       </header>
 
       <ol>
         {todos &&
           todos?.map((todo) => (
             <li key={todo.id}>
-              <Link to={`/todo/${todo.id}`}>{todo.title}</Link>
+              <button onClick={() => goToDetail(todo.id)}>{todo.title}</button>
             </li>
           ))}
       </ol>

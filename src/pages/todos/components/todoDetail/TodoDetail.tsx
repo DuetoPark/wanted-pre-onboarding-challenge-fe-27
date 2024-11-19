@@ -9,8 +9,24 @@ const TodoDetail = () => {
   const { todoId } = useParams();
   const [detail, setDetail] = useState<TodoType | null>(null);
   const { token } = useAuthStore();
-  const { mode } = useTodoStore();
+  const { mode, setMode } = useTodoStore();
   const navigate = useNavigate();
+
+  const removeTodo = () => {
+    axios
+      .delete(`${import.meta.env.VITE_BASE_URL}/todos/${todoId}`, {
+        headers: { Authorization: token },
+      })
+      .then(() => {
+        navigate("/todo");
+        setDetail(null);
+      });
+  };
+
+  const updateTodo = () => {
+    // 모드 변경 > modify
+    setMode("modify");
+  };
 
   useEffect(() => {
     if (!todoId) return;
@@ -50,17 +66,6 @@ const TodoDetail = () => {
       });
   }, [todoId]);
 
-  const removeTodo = () => {
-    axios
-      .delete(`${import.meta.env.VITE_BASE_URL}/todos/${todoId}`, {
-        headers: { Authorization: token },
-      })
-      .then(() => {
-        navigate("/todo");
-        setDetail(null);
-      });
-  };
-
   if (mode !== "read") return;
 
   if (!todoId) return;
@@ -71,12 +76,11 @@ const TodoDetail = () => {
         <h3>TodoDetail</h3>
         {detail && (
           <div>
-            <button>수정</button>
+            <button onClick={updateTodo}>수정</button>
             <button onClick={removeTodo}>삭제</button>
           </div>
         )}
       </header>
-      <p>token: {token}</p>
 
       {detail && (
         <div>

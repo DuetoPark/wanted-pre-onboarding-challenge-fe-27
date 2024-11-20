@@ -1,4 +1,3 @@
-import { useTodoStore } from "../../../../store/todoStore";
 import { useLoaderData, useNavigate } from "react-router-dom";
 
 export interface TodoType {
@@ -10,18 +9,15 @@ export interface TodoType {
 }
 
 const TodoList = () => {
-  const { setMode } = useTodoStore();
   const todos = useLoaderData() as TodoType[] | null;
   const navigate = useNavigate();
 
   const goToDetail = (id: string) => {
-    setMode("read");
-    navigate(`/todo/${id}`);
+    navigate(`/todo/${id}?mode=read`);
   };
 
   const goToNew = () => {
-    setMode("new");
-    navigate("/todo/new");
+    navigate("/todo?mode=new");
   };
 
   return (

@@ -1,19 +1,20 @@
-import { useNavigate, useParams } from "react-router-dom";
-import { useTodoStore } from "../../../../store/todoStore";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useAuthStore } from "../../../../store/authStore";
 
 const TodoForm = () => {
   const { token } = useAuthStore();
-  const { mode, setMode } = useTodoStore();
   const navigate = useNavigate();
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const { todoId } = useParams();
+  const [searchParams] = useSearchParams();
 
   const titleRef = useRef<HTMLInputElement>(null);
   const contentRef = useRef<HTMLInputElement>(null);
+
+  const mode = searchParams.get("mode") ?? "read";
 
   const addTask = () => {
     // 유효성 검사 (빈칸)
@@ -45,7 +46,6 @@ const TodoForm = () => {
   };
 
   const cancel = () => {
-    setMode("read");
     navigate("/todo");
   };
 
@@ -65,30 +65,23 @@ const TodoForm = () => {
     }
 
     // task 수정 api 호출
-    axios
-      .put(
-        `${import.meta.env.VITE_BASE_URL}/todos/${todoId}`,
-        { title, content },
-        { headers: { Authorization: token } }
-      )
-      .then((res) => {
-        // 모드 변경
-        setMode("read");
-      });
+    axios.put(
+      `${import.meta.env.VITE_BASE_URL}/todos/${todoId}`,
+      { title, content },
+      { headers: { Authorization: token } }
+    );
   };
 
   useEffect(() => {
-    // NOTE: todoId 없으면, read 모드로
-    if (!todoId) {
-      setMode("read");
+    // NOTE: querystring mode === new이면, new 모드로
+    if (mode === "new") {
+      setTitle("");
+      setContent("");
       return;
     }
 
-    // NOTE: todoId === new이면, new 모드로
-    if (todoId === "new") {
-      setMode("new");
-      return;
-    }
+    // NOTE: todoId 없으면, read 모드로
+    if (!todoId) return;
 
     // NOTE: modify 모드가 아니면 무시
     if (mode !== "modify") return;

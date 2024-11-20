@@ -1,11 +1,12 @@
 import TodoList from "./components/todoList/TodoList";
 import TodoDetail from "./components/todoDetail/TodoDetail";
 import TodoForm from "./components/todoForm/TodoForm";
-import { useTodoStore } from "../../store/todoStore";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 
 const TodosLayout = () => {
-  const { mode } = useTodoStore();
+  const [searchParams] = useSearchParams();
+  const mode = searchParams.get("mode") ?? "read";
+
   const { todoId } = useParams();
 
   return (

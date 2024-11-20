@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { TodoType } from "../todoList/TodoList";
 import axios from "axios";
 import { useAuthStore } from "../../../../store/authStore";
-import { useTodoStore } from "../../../../store/todoStore";
 
 const TodoDetail = () => {
   const { todoId } = useParams();
   const [detail, setDetail] = useState<TodoType | null>(null);
   const { token } = useAuthStore();
-  const { mode, setMode } = useTodoStore();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  const mode = searchParams.get("mode") ?? "read";
 
   const removeTodo = () => {
     axios
@@ -23,9 +24,9 @@ const TodoDetail = () => {
       });
   };
 
-  const updateTodo = () => {
+  const updateTodo = (id: string) => {
     // 모드 변경 > modify
-    setMode("modify");
+    navigate(`/todo/${id}?mode=modify`);
   };
 
   useEffect(() => {
@@ -76,7 +77,7 @@ const TodoDetail = () => {
         <h3>TodoDetail</h3>
         {detail && (
           <div>
-            <button onClick={updateTodo}>수정</button>
+            <button onClick={() => updateTodo(detail.id)}>수정</button>
             <button onClick={removeTodo}>삭제</button>
           </div>
         )}

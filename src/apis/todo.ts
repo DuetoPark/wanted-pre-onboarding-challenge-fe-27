@@ -1,10 +1,5 @@
-import { TodoType } from "../pages/todos/components/todoList/TodoList";
 import { axiosRequest } from "./axios/request";
-
-interface TodoPayloadType {
-  title: string;
-  content: string;
-}
+import type { TodoPayloadType, TodoType } from "../pages/todos/type";
 
 export const getTodos = async () => {
   return await axiosRequest.get<TodoType[]>("/todos");

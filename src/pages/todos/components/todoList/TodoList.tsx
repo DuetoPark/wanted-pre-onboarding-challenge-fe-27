@@ -1,12 +1,5 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
-
-export interface TodoType {
-  title: string;
-  content: string;
-  id: string;
-  createdAt: string;
-  updatedAt: string;
-}
+import type { TodoType } from "../../type";
 
 const TodoList = () => {
   const todos = useLoaderData() as TodoType[] | null;

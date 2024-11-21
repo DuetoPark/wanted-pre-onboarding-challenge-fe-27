@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import { TodoType } from "../todoList/TodoList";
 import { deleteTodo, getTodoById } from "../../../../apis/todo";
+import type { TodoType } from "../../type";
 
 const TodoDetail = () => {
   const { todoId } = useParams();

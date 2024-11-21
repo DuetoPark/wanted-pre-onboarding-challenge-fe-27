@@ -1,43 +1,33 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { TodoType } from "../todoList/TodoList";
-import axios from "axios";
-import { useAuthStore } from "../../../../store/authStore";
+import { deleteTodo, getTodoById } from "../../../../apis/todo";
 
 const TodoDetail = () => {
   const { todoId } = useParams();
   const [detail, setDetail] = useState<TodoType | null>(null);
-  const { token } = useAuthStore();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
   const mode = searchParams.get("mode") ?? "read";
 
-  const removeTodo = () => {
-    axios
-      .delete(`${import.meta.env.VITE_BASE_URL}/todos/${todoId}`, {
-        headers: { Authorization: token },
-      })
-      .then(() => {
-        navigate("/todo");
-        setDetail(null);
-      });
+  const removeTodo = async (id: string) => {
+    await deleteTodo(id).then(() => {
+      navigate("/todo");
+      setDetail(null);
+    });
   };
 
-  const updateTodo = (id: string) => {
-    // 모드 변경 > modify
+  const moveToUpdate = (id: string) => {
     navigate(`/todo/${id}?mode=modify`);
   };
 
   useEffect(() => {
     if (!todoId) return;
 
-    axios
-      .get(`${import.meta.env.VITE_BASE_URL}/todos/${todoId}`, {
-        headers: { Authorization: token },
-      })
+    getTodoById(todoId)
       .then((res) => {
-        const createAt = new Date(res.data.data.createdAt);
+        const createAt = new Date(res.createdAt);
         const year = createAt.getFullYear();
         const month = createAt.getMonth() + 1;
         const date = createAt.getDate();
@@ -45,7 +35,7 @@ const TodoDetail = () => {
         const min = createAt.getMinutes();
 
         return {
-          ...res.data.data,
+          ...res,
           createdAt: `${year}-${month}-${date} ${hour}:${min}`,
         };
       })
@@ -77,8 +67,8 @@ const TodoDetail = () => {
         <h3>TodoDetail</h3>
         {detail && (
           <div>
-            <button onClick={() => updateTodo(detail.id)}>수정</button>
-            <button onClick={removeTodo}>삭제</button>
+            <button onClick={() => moveToUpdate(detail.id)}>수정</button>
+            <button onClick={() => removeTodo(detail.id)}>삭제</button>
           </div>
         )}
       </header>

@@ -1,10 +1,8 @@
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
-import axios from "axios";
-import { useAuthStore } from "../../../../store/authStore";
+import { createTodo, getTodoById, updateTodo } from "../../../../apis/todo";
 
 const TodoForm = () => {
-  const { token } = useAuthStore();
   const navigate = useNavigate();
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
@@ -16,7 +14,7 @@ const TodoForm = () => {
 
   const mode = searchParams.get("mode") ?? "read";
 
-  const addTask = () => {
+  const addTask = async () => {
     // 유효성 검사 (빈칸)
     if (title.trim() === "") {
       setTitle("");
@@ -32,24 +30,18 @@ const TodoForm = () => {
     }
 
     // task 등록 api 호출
-    axios
-      .post(
-        `${import.meta.env.VITE_BASE_URL}/todos`,
-        { title, content },
-        { headers: { Authorization: token } }
-      )
-      .then((res) => {
-        console.log(res);
-        setTitle("");
-        setContent("");
-      });
+    await createTodo({ title, content }).then((res) => {
+      setTitle("");
+      setContent("");
+      navigate(`/todo/${res.id}`);
+    });
   };
 
   const cancel = () => {
     navigate("/todo");
   };
 
-  const updateTodo = () => {
+  const updateTodoById = async () => {
     // 유효성 검사 (빈칸)
     if (title.trim() === "") {
       setTitle("");
@@ -65,11 +57,10 @@ const TodoForm = () => {
     }
 
     // task 수정 api 호출
-    axios.put(
-      `${import.meta.env.VITE_BASE_URL}/todos/${todoId}`,
-      { title, content },
-      { headers: { Authorization: token } }
-    );
+    if (!todoId) return;
+    await updateTodo(todoId, { content, title }).then((res) => {
+      navigate(`/todo/${res.id}?mode=read`);
+    });
   };
 
   useEffect(() => {
@@ -86,15 +77,10 @@ const TodoForm = () => {
     // NOTE: modify 모드가 아니면 무시
     if (mode !== "modify") return;
 
-    axios
-      .get(`${import.meta.env.VITE_BASE_URL}/todos/${todoId}`, {
-        headers: { Authorization: token },
-      })
-      .then((res) => res.data.data)
-      .then((data) => {
-        setTitle(data.title);
-        setContent(data.content);
-      });
+    getTodoById(todoId).then((res) => {
+      setTitle(res.title);
+      setContent(res.content);
+    });
   }, [mode, todoId]);
 
   // NOTE: read 모드에서 form 숨김
@@ -139,7 +125,7 @@ const TodoForm = () => {
           )}
 
           {mode === "modify" && (
-            <button type="button" onClick={updateTodo}>
+            <button type="button" onClick={updateTodoById}>
               수정
             </button>
           )}

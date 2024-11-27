@@ -1,8 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
-import { afterJoin, AuthPayloadType, postJoin } from "../apis/auth";
+import { afterJoin, postJoin } from "../apis/auth";
 import { authSchema } from "../../../schema/auth";
+import type { AuthPayloadType } from "../types";
 
 const JoinPage = () => {
   const {
@@ -15,7 +16,6 @@ const JoinPage = () => {
 
   const join = useCallback(({ email, password }: AuthPayloadType) => {
     postJoin({ email, password })
-      .then((res) => res.data)
       .then(() => {
         afterJoin();
         reset();

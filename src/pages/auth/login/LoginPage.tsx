@@ -1,8 +1,9 @@
 import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { afterLogin, AuthPayloadType, postLogin } from "../apis/auth";
+import { afterLogin, postLogin } from "../apis/auth";
 import { useAuthStore } from "../../../store/authStore";
+import type { AuthPayloadType } from "../types";
 
 const LoginPage = () => {
   const { register, handleSubmit, reset } = useForm<AuthPayloadType>();
@@ -11,10 +12,9 @@ const LoginPage = () => {
 
   const login = useCallback(({ email, password }: AuthPayloadType) => {
     postLogin({ email, password })
-      .then((res) => res.data)
-      .then((data) => {
-        afterLogin(data.token);
-        setToken(data.token);
+      .then((res) => {
+        afterLogin(res.token);
+        setToken(res.token);
         reset();
       })
       .catch((error) => {

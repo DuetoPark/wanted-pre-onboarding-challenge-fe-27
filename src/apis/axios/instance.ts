@@ -44,7 +44,7 @@ const onResponse: AxiosInterceptorType["response"] = (res) => {
     ApiLog.error(res);
   }
 
-  return res.data.data;
+  return res.data?.data || res.data;
 };
 
 const onError: AxiosInterceptorType["error"] = (error) => {

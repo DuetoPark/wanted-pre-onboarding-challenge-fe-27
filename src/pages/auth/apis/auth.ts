@@ -1,18 +1,15 @@
-import { z } from "zod";
 import { axiosRequest } from "../../../apis/axios/request";
-import { authSchema } from "../../../schema/auth";
-
-export type AuthPayloadType = z.infer<typeof authSchema>;
+import type { AuthPayloadType, AuthType } from "../types";
 
 export const postLogin = async ({ email, password }: AuthPayloadType) => {
-  return axiosRequest.post<AuthPayloadType>("/users/login", {
+  return axiosRequest.post<AuthPayloadType, AuthType>("/users/login", {
     email,
     password,
   });
 };
 
 export const postJoin = async ({ email, password }: AuthPayloadType) => {
-  return axiosRequest.post<AuthPayloadType>("/users/create", {
+  return axiosRequest.post<AuthPayloadType, AuthType>("/users/create", {
     email,
     password,
   });

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { logout } from "../../apis/auth";
+import { logout } from "../../pages/auth/apis/auth";
 import { useAuthStore } from "../../store/authStore";
 
 const Gnb = () => {

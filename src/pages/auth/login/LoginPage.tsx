@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { afterLogin, AuthPayloadType, postLogin } from "../../../apis/auth";
+import { afterLogin, AuthPayloadType, postLogin } from "../apis/auth";
 import { useAuthStore } from "../../../store/authStore";
 
 const LoginPage = () => {

@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { axiosRequest } from "./axios/request";
-import { authSchema } from "../schema/auth";
+import { axiosRequest } from "../../../apis/axios/request";
+import { authSchema } from "../../../schema/auth";
 
 export type AuthPayloadType = z.infer<typeof authSchema>;
 

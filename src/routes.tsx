@@ -7,7 +7,7 @@ import NotFound from "./pages/error/NotFound";
 import AuthChecker from "./components/container/AuthChecker";
 import Gnb from "./components/layout/Gnb";
 import TodosLayout from "./pages/todos/TodosLayout";
-import { getTodos } from "./apis/todo";
+import { getTodos } from "./pages/todos/apis/todo";
 
 export const router = createBrowserRouter([
   {

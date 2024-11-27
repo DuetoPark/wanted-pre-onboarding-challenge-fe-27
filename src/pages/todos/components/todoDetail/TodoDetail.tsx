@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import { deleteTodo, getTodoById } from "../../../../apis/todo";
+import { deleteTodo, getTodoById } from "../../apis/todo";
 import type { TodoType } from "../../type";
+import { formatDate, formatTime } from "../../utils/date";
 
 const TodoDetail = () => {
   const { todoId } = useParams();
@@ -27,29 +28,14 @@ const TodoDetail = () => {
 
     getTodoById(todoId)
       .then((res) => {
-        const createAt = new Date(res.createdAt);
-        const year = createAt.getFullYear();
-        const month = createAt.getMonth() + 1;
-        const date = createAt.getDate();
-        const hour = createAt.getHours();
-        const min = createAt.getMinutes();
-
         return {
           ...res,
-          createdAt: `${year}-${month}-${date} ${hour}:${min}`,
-        };
-      })
-      .then((data) => {
-        const updatedAt = new Date(data.updatedAt);
-        const year = updatedAt.getFullYear();
-        const month = updatedAt.getMonth() + 1;
-        const date = updatedAt.getDate();
-        const hour = updatedAt.getHours();
-        const min = updatedAt.getMinutes();
-
-        return {
-          ...data,
-          updatedAt: `${year}-${month}-${date} ${hour}:${min}`,
+          createdAt: `${formatDate(res.createdAt)} ${formatTime(
+            res.createdAt
+          )}`,
+          updatedAt: `${formatDate(res.updatedAt)} ${formatTime(
+            res.updatedAt
+          )}`,
         };
       })
       .then((data) => {

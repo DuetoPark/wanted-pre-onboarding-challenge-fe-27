@@ -1,14 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
-import AuthLayout from "./pages/auth/AuthLayout";
-import JoinPage from "./pages/auth/join/JoinPage";
-import LoginPage from "./pages/auth/login/LoginPage";
+import AuthLayout from "../pages/auth/AuthLayout";
+import JoinPage from "../pages/auth/JoinPage";
+import LoginPage from "../pages/auth/LoginPage";
 import App from "./App";
-import NotFound from "./pages/error/NotFound";
-import AuthChecker from "./components/container/AuthChecker";
-import TodosLayout from "./pages/todos/TodosLayout";
-import { getTodos } from "./pages/todos/apis/todo";
-import TodoForm from "./pages/todos/components/todoForm/TodoForm";
-import TodoDetail from "./pages/todos/components/todoDetail/TodoDetail";
+import NotFound from "../pages/error/NotFound";
+import AuthChecker from "../shared/components/container/AuthChecker";
+import TodosLayout from "../pages/todos/TodosLayout";
+import { getTodos } from "../features/todos/apis/todo";
+import TodoFormPage from "../pages/todos/TodoFormPage";
+import TodoDetailPage from "../pages/todos/TodoDetailPage";
 
 export const router = createBrowserRouter([
   {
@@ -40,15 +40,15 @@ export const router = createBrowserRouter([
         children: [
           {
             path: "new",
-            element: <TodoForm />,
+            element: <TodoFormPage />,
           },
           {
             path: ":todoId",
-            element: <TodoDetail />,
+            element: <TodoDetailPage />,
           },
           {
             path: ":todoId/modify",
-            element: <TodoForm />,
+            element: <TodoFormPage />,
           },
         ],
         loader: todosLoader,

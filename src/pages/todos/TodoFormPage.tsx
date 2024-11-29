@@ -1,11 +1,15 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
-import { createTodo, getTodoById, updateTodo } from "../../apis/todo";
-import { TODO_URL } from "../../../../routes";
+import {
+  createTodo,
+  getTodoById,
+  updateTodo,
+} from "../../features/todos/apis/todo";
+import { TODO_URL } from "../../app/routes";
 
 const EMPTY_STRING = "";
 
-const TodoForm = () => {
+const TodoFormPage = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState<string>(EMPTY_STRING);
   const [content, setContent] = useState<string>(EMPTY_STRING);
@@ -34,7 +38,6 @@ const TodoForm = () => {
   };
 
   const cancel = () => {
-    // navigate("/todo");
     navigate(TODO_URL.HOME);
   };
 
@@ -49,7 +52,6 @@ const TodoForm = () => {
     // task 수정 api 호출
     if (!todoId) return;
     await updateTodo(todoId, { content, title }).then((res) => {
-      // navigate(`/todo/${res.id}`);
       navigate(TODO_URL.DETAIL(res.id));
     });
   };
@@ -121,7 +123,7 @@ const TodoForm = () => {
   );
 };
 
-export default TodoForm;
+export default TodoFormPage;
 
 function isEmpty(input: string) {
   return input.trim() === EMPTY_STRING;

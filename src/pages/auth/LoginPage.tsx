@@ -1,9 +1,9 @@
 import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { afterLogin, postLogin } from "../apis/auth";
-import { useAuthStore } from "../../../store/authStore";
-import type { AuthPayloadType } from "../types";
+import { afterLogin, postLogin } from "../../features/auth/apis/auth";
+import { useAuthStore } from "../../features/auth/store/authStore";
+import type { AuthPayloadType } from "../../features/auth/types";
 
 const LoginPage = () => {
   const { register, handleSubmit, reset } = useForm<AuthPayloadType>();

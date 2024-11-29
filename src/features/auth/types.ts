@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { authSchema } from "../../schema/auth";
+import { authSchema } from "./schema/auth";
 
 export type AuthPayloadType = z.infer<typeof authSchema>;
 

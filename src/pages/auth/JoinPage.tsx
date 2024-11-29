@@ -1,9 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
-import { afterJoin, postJoin } from "../apis/auth";
-import { authSchema } from "../../../schema/auth";
-import type { AuthPayloadType } from "../types";
+import { afterJoin, postJoin } from "../../features/auth/apis/auth";
+import { authSchema } from "../../features/auth/schema/auth";
+import type { AuthPayloadType } from "../../features/auth/types";
 
 const JoinPage = () => {
   const {

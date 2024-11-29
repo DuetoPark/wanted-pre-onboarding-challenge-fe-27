@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { deleteTodo, getTodoById } from "../../apis/todo";
-import type { TodoType } from "../../type";
-import { formatDate, formatTime } from "../../utils/date";
-import { TODO_URL } from "../../../../routes";
+import { deleteTodo, getTodoById } from "../../features/todos/apis/todo";
+import type { TodoType } from "../../features/todos/type";
+import { formatDate, formatTime } from "../../shared/utils/date";
+import { TODO_URL } from "../../app/routes";
 
-const TodoDetail = () => {
+const TodoDetailPage = () => {
   const { todoId } = useParams();
   const [detail, setDetail] = useState<TodoType | null>(null);
   const navigate = useNavigate();
@@ -44,7 +44,7 @@ const TodoDetail = () => {
   return (
     <section>
       <header>
-        <h3>TodoDetail</h3>
+        <h3>TodoDetailPage</h3>
         {detail && (
           <div>
             <button onClick={() => moveToUpdate(detail.id)}>수정</button>
@@ -65,4 +65,4 @@ const TodoDetail = () => {
   );
 };
 
-export default TodoDetail;
+export default TodoDetailPage;

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { logout } from "../../pages/auth/apis/auth";
-import { useAuthStore } from "../../store/authStore";
+import { logout } from "../../../features/auth/apis/auth";
+import { useAuthStore } from "../../../features/auth/store/authStore";
 
 const Gnb = () => {
   const { token, setToken } = useAuthStore();

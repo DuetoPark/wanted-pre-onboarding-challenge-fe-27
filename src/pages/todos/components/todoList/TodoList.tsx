@@ -1,16 +1,17 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 import type { TodoType } from "../../type";
+import { TODO_URL } from "../../../../routes";
 
 const TodoList = () => {
   const todos = useLoaderData() as TodoType[] | null;
   const navigate = useNavigate();
 
   const goToDetail = (id: string) => {
-    navigate(`/todo/${id}?mode=read`);
+    navigate(TODO_URL.DETAIL(id));
   };
 
   const goToNew = () => {
-    navigate("/todo?mode=new");
+    navigate(TODO_URL.NEW);
   };
 
   return (

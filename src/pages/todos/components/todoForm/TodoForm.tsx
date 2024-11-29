@@ -1,90 +1,72 @@
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { createTodo, getTodoById, updateTodo } from "../../apis/todo";
+import { TODO_URL } from "../../../../routes";
+
+const EMPTY_STRING = "";
 
 const TodoForm = () => {
   const navigate = useNavigate();
-  const [title, setTitle] = useState<string>("");
-  const [content, setContent] = useState<string>("");
+  const [title, setTitle] = useState<string>(EMPTY_STRING);
+  const [content, setContent] = useState<string>(EMPTY_STRING);
   const { todoId } = useParams();
-  const [searchParams] = useSearchParams();
 
   const titleRef = useRef<HTMLInputElement>(null);
   const contentRef = useRef<HTMLInputElement>(null);
 
-  const mode = searchParams.get("mode") ?? "read";
+  const isModify = useLocation().pathname.includes("modify");
 
   const addTask = async () => {
     // 유효성 검사 (빈칸)
-    if (title.trim() === "") {
-      setTitle("");
-      titleRef?.current?.focus();
+    if (
+      !ensureNotEmpty(title, titleRef) ||
+      !ensureNotEmpty(content, contentRef)
+    )
       return;
-    }
-
-    // 유효성 검사 (빈칸)
-    if (content.trim() === "") {
-      setContent("");
-      contentRef?.current?.focus();
-      return;
-    }
 
     // task 등록 api 호출
     await createTodo({ title, content }).then((res) => {
-      setTitle("");
-      setContent("");
-      navigate(`/todo/${res.id}`);
+      setTitle(EMPTY_STRING);
+      setContent(EMPTY_STRING);
+      // navigate(`/todo/${res.id}`);
+      navigate(TODO_URL.DETAIL(res.id));
     });
   };
 
   const cancel = () => {
-    navigate("/todo");
+    // navigate("/todo");
+    navigate(TODO_URL.HOME);
   };
 
   const updateTodoById = async () => {
     // 유효성 검사 (빈칸)
-    if (title.trim() === "") {
-      setTitle("");
-      titleRef?.current?.focus();
+    if (
+      !ensureNotEmpty(title, titleRef) ||
+      !ensureNotEmpty(content, contentRef)
+    )
       return;
-    }
-
-    // 유효성 검사 (빈칸)
-    if (content.trim() === "") {
-      setContent("");
-      contentRef?.current?.focus();
-      return;
-    }
 
     // task 수정 api 호출
     if (!todoId) return;
     await updateTodo(todoId, { content, title }).then((res) => {
-      navigate(`/todo/${res.id}?mode=read`);
+      // navigate(`/todo/${res.id}`);
+      navigate(TODO_URL.DETAIL(res.id));
     });
   };
 
   useEffect(() => {
-    // NOTE: querystring mode === new이면, new 모드로
-    if (mode === "new") {
-      setTitle("");
-      setContent("");
+    // NOTE: modify 모드가 아닌 경우
+    if (!isModify) {
+      setTitle(EMPTY_STRING);
+      setContent(EMPTY_STRING);
       return;
     }
-
-    // NOTE: todoId 없으면, read 모드로
-    if (!todoId) return;
-
-    // NOTE: modify 모드가 아니면 무시
-    if (mode !== "modify") return;
 
     getTodoById(todoId).then((res) => {
       setTitle(res.title);
       setContent(res.content);
     });
-  }, [mode, todoId]);
-
-  // NOTE: read 모드에서 form 숨김
-  if (mode === "read") return;
+  }, [isModify]);
 
   return (
     <div>
@@ -118,13 +100,13 @@ const TodoForm = () => {
         </div>
 
         <div>
-          {mode === "new" && (
+          {!isModify && (
             <button type="button" onClick={addTask}>
               등록
             </button>
           )}
 
-          {mode === "modify" && (
+          {isModify && (
             <button type="button" onClick={updateTodoById}>
               수정
             </button>
@@ -140,3 +122,20 @@ const TodoForm = () => {
 };
 
 export default TodoForm;
+
+function isEmpty(input: string) {
+  return input.trim() === EMPTY_STRING;
+}
+
+function focusElem<T extends HTMLElement>(ref: React.RefObject<T>) {
+  ref?.current?.focus();
+}
+
+function ensureNotEmpty(value: string, ref: React.RefObject<HTMLInputElement>) {
+  if (isEmpty(value)) {
+    focusElem(ref);
+    return false;
+  }
+
+  return true;
+}

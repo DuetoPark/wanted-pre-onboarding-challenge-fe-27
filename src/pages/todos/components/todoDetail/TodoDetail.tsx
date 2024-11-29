@@ -1,26 +1,24 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { deleteTodo, getTodoById } from "../../apis/todo";
 import type { TodoType } from "../../type";
 import { formatDate, formatTime } from "../../utils/date";
+import { TODO_URL } from "../../../../routes";
 
 const TodoDetail = () => {
   const { todoId } = useParams();
   const [detail, setDetail] = useState<TodoType | null>(null);
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-
-  const mode = searchParams.get("mode") ?? "read";
 
   const removeTodo = async (id: string) => {
     await deleteTodo(id).then(() => {
-      navigate("/todo");
+      navigate(TODO_URL.HOME);
       setDetail(null);
     });
   };
 
   const moveToUpdate = (id: string) => {
-    navigate(`/todo/${id}?mode=modify`);
+    navigate(TODO_URL.MODIFY(id));
   };
 
   useEffect(() => {
@@ -42,10 +40,6 @@ const TodoDetail = () => {
         setDetail(data);
       });
   }, [todoId]);
-
-  if (mode !== "read") return;
-
-  if (!todoId) return;
 
   return (
     <section>

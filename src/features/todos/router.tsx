@@ -1,6 +1,4 @@
-import { redirect } from "react-router-dom";
-import { getTodos } from "./apis/todo";
-import { noToken } from "../auth/utils";
+import { todoLoader } from "./loader";
 import TodosLayout from "../../pages/todos/TodosLayout";
 import TodoFormPage from "../../pages/todos/TodoFormPage";
 import TodoDetailPage from "../../pages/todos/TodoDetailPage";
@@ -8,14 +6,7 @@ import TodoDetailPage from "../../pages/todos/TodoDetailPage";
 const todosRouter = Object.freeze({
   path: "todo",
   element: <TodosLayout />,
-  loader: () => {
-    // NOTE: 리다이렉트
-    if (noToken()) {
-      return redirect("/auth");
-    }
-
-    return getTodos();
-  },
+  loader: todoLoader,
   children: [
     {
       path: "new",

@@ -1,4 +1,4 @@
-import { axiosRequest } from "../../../apis/axios/request";
+import { axiosRequest } from "../../../shared/axios/request";
 import type { TodoPayloadType, TodoType } from "../type";
 
 export const getTodos = async () => {

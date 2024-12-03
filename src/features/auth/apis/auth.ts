@@ -1,4 +1,4 @@
-import { axiosRequest } from "../../../apis/axios/request";
+import { axiosRequest } from "../../../shared/axios/request";
 import type { AuthPayloadType, AuthType } from "../types";
 
 export const postLogin = async ({ email, password }: AuthPayloadType) => {

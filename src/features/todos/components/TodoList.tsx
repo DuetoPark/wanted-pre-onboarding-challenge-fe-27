@@ -1,6 +1,6 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 import type { TodoType } from "../type";
-import { TODO_URL } from "../../../app/routes";
+import { TODO_URL } from "../url";
 
 const TodoList = () => {
   const todos = useLoaderData() as TodoType[] | null;

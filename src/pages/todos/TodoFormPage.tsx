@@ -5,7 +5,7 @@ import {
   getTodoById,
   updateTodo,
 } from "../../features/todos/apis/todo";
-import { TODO_URL } from "../../app/routes";
+import { TODO_URL } from "../../features/todos/url";
 
 const EMPTY_STRING = "";
 

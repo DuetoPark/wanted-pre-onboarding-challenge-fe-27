@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { deleteTodo, getTodoById } from "../../features/todos/apis/todo";
 import type { TodoType } from "../../features/todos/type";
 import { formatDate, formatTime } from "../../shared/utils/date";
-import { TODO_URL } from "../../app/routes";
+import { TODO_URL } from "../../features/todos/url";
 
 const TodoDetailPage = () => {
   const { todoId } = useParams();

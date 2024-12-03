@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import Gnb from "../shared/components/layout/Gnb";
+import Gnb from "../widgets/Gnb";
 
 import "./App.css";
 

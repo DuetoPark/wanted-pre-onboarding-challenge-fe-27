@@ -1,12 +1,21 @@
 import { axiosRequest } from "../../../shared/axios/request";
+import { formatDate, formatTime } from "../../../shared/utils/date";
 import type { TodoPayloadType, TodoType } from "../type";
 
 export const getTodos = async () => {
   return await axiosRequest.get<TodoType[]>("/todos");
 };
 
-export const getTodoById = async (todoId: string) => {
-  return await axiosRequest.get<TodoType>(`/todos/${todoId}`);
+export const getTodoById = async (todoId?: string) => {
+  if (!todoId) return null;
+
+  return await axiosRequest
+    .get<TodoType>(`/todos/${todoId}`) //
+    .then((res) => ({
+      ...res,
+      createdAt: `${formatDate(res.createdAt)} ${formatTime(res.createdAt)}`,
+      updatedAt: `${formatDate(res.updatedAt)} ${formatTime(res.updatedAt)}`,
+    }));
 };
 
 export const createTodo = async (payload: TodoPayloadType) => {

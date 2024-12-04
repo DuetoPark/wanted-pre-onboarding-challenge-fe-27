@@ -1,64 +1,57 @@
-import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { deleteTodo, getTodoById } from "../../features/todos/apis/todo";
-import type { TodoType } from "../../features/todos/type";
-import { formatDate, formatTime } from "../../shared/utils/date";
 import { TODO_URL } from "../../features/todos/url";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { todoMutations, todoQueries } from "../../features/todos/todosQuery";
 
 const TodoDetailPage = () => {
   const { todoId } = useParams();
-  const [detail, setDetail] = useState<TodoType | null>(null);
   const navigate = useNavigate();
 
-  const removeTodo = async (id: string) => {
-    await deleteTodo(id).then(() => {
-      navigate(TODO_URL.HOME);
-      setDetail(null);
-    });
-  };
+  const queryClient = useQueryClient();
 
-  const moveToUpdate = (id: string) => {
-    navigate(TODO_URL.MODIFY(id));
-  };
+  const {
+    data: todoDetail,
+    isLoading,
+    isError,
+    error,
+  } = useQuery(todoQueries.detail(todoId));
 
-  useEffect(() => {
-    if (!todoId) return;
+  const { mutate: deleteTodo } = useMutation({
+    ...todoMutations.delete(),
+    onSuccess: () => {
+      navigate(TODO_URL.HOME, { replace: true });
+      queryClient.invalidateQueries({ queryKey: [...todoQueries.lists()] });
+    },
+  });
 
-    getTodoById(todoId)
-      .then((res) => {
-        return {
-          ...res,
-          createdAt: `${formatDate(res.createdAt)} ${formatTime(
-            res.createdAt
-          )}`,
-          updatedAt: `${formatDate(res.updatedAt)} ${formatTime(
-            res.updatedAt
-          )}`,
-        };
-      })
-      .then((data) => {
-        setDetail(data);
-      });
-  }, [todoId]);
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (isError) {
+    return <p>Error: {error.message}</p>;
+  }
 
   return (
     <section>
       <header>
         <h3>TodoDetailPage</h3>
-        {detail && (
+        {todoDetail && (
           <div>
-            <button onClick={() => moveToUpdate(detail.id)}>수정</button>
-            <button onClick={() => removeTodo(detail.id)}>삭제</button>
+            <button onClick={() => navigate(TODO_URL.MODIFY(todoDetail.id))}>
+              수정
+            </button>
+            <button onClick={() => deleteTodo(todoDetail.id)}>삭제</button>
           </div>
         )}
       </header>
 
-      {detail && (
+      {todoDetail && (
         <div>
-          <p>title: {detail.title}</p>
-          <p>content: {detail.content}</p>
-          <p>작성일: {detail.createdAt}</p>
-          <p>수정일: {detail.updatedAt}</p>
+          <p>title: {todoDetail.title}</p>
+          <p>content: {todoDetail.content}</p>
+          <p>작성일: {todoDetail.createdAt}</p>
+          <p>수정일: {todoDetail.updatedAt}</p>
         </div>
       )}
     </section>

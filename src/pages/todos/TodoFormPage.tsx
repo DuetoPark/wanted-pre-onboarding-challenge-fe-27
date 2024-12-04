@@ -1,11 +1,8 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
-import {
-  createTodo,
-  getTodoById,
-  updateTodo,
-} from "../../features/todos/apis/todo";
 import { TODO_URL } from "../../features/todos/url";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { todoMutations, todoQueries } from "../../features/todos/todosQuery";
 
 const EMPTY_STRING = "";
 
@@ -18,7 +15,24 @@ const TodoFormPage = () => {
   const titleRef = useRef<HTMLInputElement>(null);
   const contentRef = useRef<HTMLInputElement>(null);
 
-  const isModify = useLocation().pathname.includes("modify");
+  const queryClient = useQueryClient();
+  const { data: todoDetail } = useQuery(todoQueries.detail(todoId));
+  const { mutate: createTodo } = useMutation({
+    ...todoMutations.create(),
+    onSuccess(data) {
+      setTitle(EMPTY_STRING);
+      setContent(EMPTY_STRING);
+      navigate(TODO_URL.DETAIL(data.id));
+      queryClient.invalidateQueries({ queryKey: [...todoQueries.lists()] });
+    },
+  });
+  const { mutate: updateTodo } = useMutation({
+    ...todoMutations.update(),
+    onSuccess(data) {
+      navigate(TODO_URL.DETAIL(data.id));
+      queryClient.invalidateQueries({ queryKey: [...todoQueries.lists()] });
+    },
+  });
 
   const addTask = async () => {
     // 유효성 검사 (빈칸)
@@ -29,12 +43,7 @@ const TodoFormPage = () => {
       return;
 
     // task 등록 api 호출
-    await createTodo({ title, content }).then((res) => {
-      setTitle(EMPTY_STRING);
-      setContent(EMPTY_STRING);
-      // navigate(`/todo/${res.id}`);
-      navigate(TODO_URL.DETAIL(res.id));
-    });
+    createTodo({ title, content });
   };
 
   const cancel = () => {
@@ -51,24 +60,17 @@ const TodoFormPage = () => {
 
     // task 수정 api 호출
     if (!todoId) return;
-    await updateTodo(todoId, { content, title }).then((res) => {
-      navigate(TODO_URL.DETAIL(res.id));
-    });
+
+    updateTodo({ id: todoId, payload: { content, title } });
   };
 
-  useEffect(() => {
-    // NOTE: modify 모드가 아닌 경우
-    if (!isModify) {
-      setTitle(EMPTY_STRING);
-      setContent(EMPTY_STRING);
-      return;
-    }
-
-    getTodoById(todoId).then((res) => {
-      setTitle(res.title);
-      setContent(res.content);
-    });
-  }, [isModify]);
+  useEffect(
+    function initTitleAndContent() {
+      setTitle(todoDetail ? todoDetail.title : EMPTY_STRING);
+      setContent(todoDetail ? todoDetail.content : EMPTY_STRING);
+    },
+    [todoDetail]
+  );
 
   return (
     <div>
@@ -102,13 +104,13 @@ const TodoFormPage = () => {
         </div>
 
         <div>
-          {!isModify && (
+          {!todoId && (
             <button type="button" onClick={addTask}>
               등록
             </button>
           )}
 
-          {isModify && (
+          {todoId && (
             <button type="button" onClick={updateTodoById}>
               수정
             </button>

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { logout } from "../features/auth/apis/auth";
 import { useAuthStore } from "../features/auth/store/authStore";
+import { AUTH_URL } from "../features/auth/constants/url";
 
 const Gnb = () => {
   const { token, setToken } = useAuthStore();
@@ -36,7 +37,7 @@ const Gnb = () => {
           )}
           {!token && (
             <li>
-              <Link to="/auth">로그인</Link>
+              <Link to={AUTH_URL.LOGIN.PATH}>{AUTH_URL.LOGIN.TEXT}</Link>
             </li>
           )}
           <li>

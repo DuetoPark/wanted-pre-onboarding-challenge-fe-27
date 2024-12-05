@@ -1,4 +1,5 @@
 import { axiosRequest } from "../../../shared/axios/request";
+import { AUTH_URL } from "../constants/url";
 import type { AuthPayloadType, AuthType } from "../types";
 
 export const postLogin = async ({ email, password }: AuthPayloadType) => {
@@ -17,5 +18,5 @@ export const postJoin = async ({ email, password }: AuthPayloadType) => {
 
 export const logout = () => {
   window.localStorage.removeItem("token");
-  location.href = "/auth";
+  location.href = AUTH_URL.LOGIN.PATH;
 };

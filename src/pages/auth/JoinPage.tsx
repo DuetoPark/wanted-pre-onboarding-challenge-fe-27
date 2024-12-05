@@ -1,62 +1,48 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useCallback, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { authMutations } from "../../features/auth/authQuery";
-import { authSchema } from "../../features/auth/schema/auth";
+import { AUTH_URL } from "../../features/auth/constants/url";
+import AuthForm from "../../features/auth/components/AuthForm";
+import AuthLink from "../../features/auth/components/AuthLink";
 import type { AuthPayloadType } from "../../features/auth/types";
 
 const JoinPage = () => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors, isValid, isDirty },
-  } = useForm<AuthPayloadType>({ resolver: zodResolver(authSchema) });
-  const [joinError, setJoinError] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const { mutate: join } = useMutation({
     ...authMutations.join(),
-    onSuccess() {
-      location.replace("/auth");
-      reset();
-    },
-    onError(error) {
-      const errorMessage =
-        error?.response?.data?.details || "이미 존재하는 유저입니다";
-      setJoinError(errorMessage);
-
-      if (error?.response?.status === 409) {
-        reset();
-      }
-    },
+    onSuccess: () => moveToLogin(),
+    onError: (error) => showError(error),
   });
+
+  const moveToLogin = useCallback(() => {
+    location.replace(AUTH_URL.LOGIN.PATH);
+  }, []);
+
+  const showError = useCallback((error: unknown) => {
+    const message = error?.response?.data?.details || "회원가입에 실패했습니다";
+    setErrorMessage(message);
+  }, []);
+
+  const onJoin = useCallback(({ email, password }: AuthPayloadType) => {
+    join({ email, password });
+  }, []);
 
   return (
     <section>
       <h1>Join</h1>
 
-      <form onSubmit={handleSubmit((formData) => join(formData))}>
-        <div>
-          <label htmlFor="email">아이디</label>
-          <input type="text" id="email" {...register("email")} />
-          {errors.email?.message && <p>{errors.email?.message}</p>}
-        </div>
+      <AuthForm
+        submitText="회원가입"
+        errorMessage={errorMessage}
+        onPermit={onJoin}
+      />
 
-        <div>
-          <label htmlFor="password">비밀번호</label>
-          <input type="password" id="password" {...register("password")} />
-          {errors.password?.message && <p>{errors.password?.message}</p>}
-        </div>
-
-        {joinError && <p>{joinError}</p>}
-
-        <div>
-          <button type="submit" disabled={!isDirty || !isValid}>
-            회원가입
-          </button>
-        </div>
-      </form>
+      <AuthLink
+        guideMessage="이미 계정이 있다면"
+        text={AUTH_URL.LOGIN.TEXT}
+        path={AUTH_URL.LOGIN.PATH}
+      />
     </section>
   );
 };

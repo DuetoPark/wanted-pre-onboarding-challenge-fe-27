@@ -19,12 +19,3 @@ export const logout = () => {
   window.localStorage.removeItem("token");
   location.href = "/auth";
 };
-
-export const afterLogin = (token: string) => {
-  window.localStorage.setItem("token", token);
-  location.replace("/");
-};
-
-export const afterJoin = () => {
-  location.replace("/auth");
-};

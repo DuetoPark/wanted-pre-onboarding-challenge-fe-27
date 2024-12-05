@@ -1,7 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { afterJoin, postJoin } from "../../features/auth/apis/auth";
+import { useMutation } from "@tanstack/react-query";
+import { authMutations } from "../../features/auth/authQuery";
 import { authSchema } from "../../features/auth/schema/auth";
 import type { AuthPayloadType } from "../../features/auth/types";
 
@@ -14,26 +15,28 @@ const JoinPage = () => {
   } = useForm<AuthPayloadType>({ resolver: zodResolver(authSchema) });
   const [joinError, setJoinError] = useState<string>("");
 
-  const join = useCallback(({ email, password }: AuthPayloadType) => {
-    postJoin({ email, password })
-      .then(() => {
-        afterJoin();
-        reset();
-      })
-      .catch((error) => {
-        setJoinError(error.response.data.details);
+  const { mutate: join } = useMutation({
+    ...authMutations.join(),
+    onSuccess() {
+      location.replace("/auth");
+      reset();
+    },
+    onError(error) {
+      const errorMessage =
+        error?.response?.data?.details || "이미 존재하는 유저입니다";
+      setJoinError(errorMessage);
 
-        if (error.response.status === 409) {
-          reset();
-        }
-      });
-  }, []);
+      if (error?.response?.status === 409) {
+        reset();
+      }
+    },
+  });
 
   return (
     <section>
       <h1>Join</h1>
 
-      <form onSubmit={handleSubmit(join)}>
+      <form onSubmit={handleSubmit((formData) => join(formData))}>
         <div>
           <label htmlFor="email">아이디</label>
           <input type="text" id="email" {...register("email")} />

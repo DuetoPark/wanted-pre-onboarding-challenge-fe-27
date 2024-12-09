@@ -45,6 +45,7 @@ const RAW_RUNTIME_STATE =
           ["react-router-dom", "virtual:ca666f78289bd4968eec6c5bd9380f94f9f93a403050e051b2bba93bd04f4a8bd1554d6ea4da8df116ebdc7e602052343465fca43815848a6b4ef45c03dbbaaf#npm:6.28.0"],\
           ["typescript", "patch:typescript@npm%3A5.6.3#optional!builtin<compat/typescript>::version=5.6.3&hash=8c6c40"],\
           ["typescript-eslint", "virtual:ca666f78289bd4968eec6c5bd9380f94f9f93a403050e051b2bba93bd04f4a8bd1554d6ea4da8df116ebdc7e602052343465fca43815848a6b4ef45c03dbbaaf#npm:8.14.0"],\
+          ["uuid", "npm:11.0.3"],\
           ["vite", "virtual:ca666f78289bd4968eec6c5bd9380f94f9f93a403050e051b2bba93bd04f4a8bd1554d6ea4da8df116ebdc7e602052343465fca43815848a6b4ef45c03dbbaaf#npm:5.4.11"],\
           ["zod", "npm:3.23.8"],\
           ["zustand", "virtual:ca666f78289bd4968eec6c5bd9380f94f9f93a403050e051b2bba93bd04f4a8bd1554d6ea4da8df116ebdc7e602052343465fca43815848a6b4ef45c03dbbaaf#npm:5.0.1"]\
@@ -3485,6 +3486,7 @@ const RAW_RUNTIME_STATE =
           ["react-router-dom", "virtual:ca666f78289bd4968eec6c5bd9380f94f9f93a403050e051b2bba93bd04f4a8bd1554d6ea4da8df116ebdc7e602052343465fca43815848a6b4ef45c03dbbaaf#npm:6.28.0"],\
           ["typescript", "patch:typescript@npm%3A5.6.3#optional!builtin<compat/typescript>::version=5.6.3&hash=8c6c40"],\
           ["typescript-eslint", "virtual:ca666f78289bd4968eec6c5bd9380f94f9f93a403050e051b2bba93bd04f4a8bd1554d6ea4da8df116ebdc7e602052343465fca43815848a6b4ef45c03dbbaaf#npm:8.14.0"],\
+          ["uuid", "npm:11.0.3"],\
           ["vite", "virtual:ca666f78289bd4968eec6c5bd9380f94f9f93a403050e051b2bba93bd04f4a8bd1554d6ea4da8df116ebdc7e602052343465fca43815848a6b4ef45c03dbbaaf#npm:5.4.11"],\
           ["zod", "npm:3.23.8"],\
           ["zustand", "virtual:ca666f78289bd4968eec6c5bd9380f94f9f93a403050e051b2bba93bd04f4a8bd1554d6ea4da8df116ebdc7e602052343465fca43815848a6b4ef45c03dbbaaf#npm:5.0.1"]\
@@ -3621,6 +3623,15 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["uri-js", "npm:4.4.1"],\
           ["punycode", "npm:2.3.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["uuid", [\
+      ["npm:11.0.3", {\
+        "packageLocation": "../../../../.yarn/berry/cache/uuid-npm-11.0.3-abcb5b16c0-10c0.zip/node_modules/uuid/",\
+        "packageDependencies": [\
+          ["uuid", "npm:11.0.3"]\
         ],\
         "linkType": "HARD"\
       }]\

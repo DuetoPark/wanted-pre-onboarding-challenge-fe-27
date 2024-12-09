@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Gnb from "../widgets/Gnb";
+import ToastContainer from "../shared/component/toast/ToastContainer";
 
 import "./App.css";
 
@@ -8,6 +9,7 @@ function App() {
     <>
       <Gnb />
       <Outlet />
+      <ToastContainer />
     </>
   );
 }

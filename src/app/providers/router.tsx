@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { queryClient } from "./query-client";
+import { queryClient } from "./QueryProvider";
 import { todosLoader } from "../../features/todos/todosLoader";
 import App from "../App";
 import NotFound from "../../pages/error/NotFound";

@@ -36,6 +36,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react-dom", "npm:18.3.1"],\
           ["@vitejs/plugin-react", "virtual:ca666f78289bd4968eec6c5bd9380f94f9f93a403050e051b2bba93bd04f4a8bd1554d6ea4da8df116ebdc7e602052343465fca43815848a6b4ef45c03dbbaaf#npm:4.3.3"],\
           ["axios", "npm:1.7.7"],\
+          ["classnames", "npm:2.5.1"],\
           ["eslint", "virtual:ca666f78289bd4968eec6c5bd9380f94f9f93a403050e051b2bba93bd04f4a8bd1554d6ea4da8df116ebdc7e602052343465fca43815848a6b4ef45c03dbbaaf#npm:9.14.0"],\
           ["eslint-plugin-react-hooks", "virtual:ca666f78289bd4968eec6c5bd9380f94f9f93a403050e051b2bba93bd04f4a8bd1554d6ea4da8df116ebdc7e602052343465fca43815848a6b4ef45c03dbbaaf#npm:5.0.0"],\
           ["eslint-plugin-react-refresh", "virtual:ca666f78289bd4968eec6c5bd9380f94f9f93a403050e051b2bba93bd04f4a8bd1554d6ea4da8df116ebdc7e602052343465fca43815848a6b4ef45c03dbbaaf#npm:0.4.14"],\
@@ -1833,6 +1834,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../../.yarn/berry/cache/chownr-npm-2.0.0-638f1c9c61-10c0.zip/node_modules/chownr/",\
         "packageDependencies": [\
           ["chownr", "npm:2.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["classnames", [\
+      ["npm:2.5.1", {\
+        "packageLocation": "../../../../.yarn/berry/cache/classnames-npm-2.5.1-c7273f3423-10c0.zip/node_modules/classnames/",\
+        "packageDependencies": [\
+          ["classnames", "npm:2.5.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -3880,6 +3890,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react-dom", "npm:18.3.1"],\
           ["@vitejs/plugin-react", "virtual:ca666f78289bd4968eec6c5bd9380f94f9f93a403050e051b2bba93bd04f4a8bd1554d6ea4da8df116ebdc7e602052343465fca43815848a6b4ef45c03dbbaaf#npm:4.3.3"],\
           ["axios", "npm:1.7.7"],\
+          ["classnames", "npm:2.5.1"],\
           ["eslint", "virtual:ca666f78289bd4968eec6c5bd9380f94f9f93a403050e051b2bba93bd04f4a8bd1554d6ea4da8df116ebdc7e602052343465fca43815848a6b4ef45c03dbbaaf#npm:9.14.0"],\
           ["eslint-plugin-react-hooks", "virtual:ca666f78289bd4968eec6c5bd9380f94f9f93a403050e051b2bba93bd04f4a8bd1554d6ea4da8df116ebdc7e602052343465fca43815848a6b4ef45c03dbbaaf#npm:5.0.0"],\
           ["eslint-plugin-react-refresh", "virtual:ca666f78289bd4968eec6c5bd9380f94f9f93a403050e051b2bba93bd04f4a8bd1554d6ea4da8df116ebdc7e602052343465fca43815848a6b4ef45c03dbbaaf#npm:0.4.14"],\

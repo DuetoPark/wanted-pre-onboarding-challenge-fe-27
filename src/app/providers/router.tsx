@@ -9,6 +9,7 @@ import JoinPage from "../../pages/auth/JoinPage";
 import TodosLayout from "../../pages/todos/TodosLayout";
 import TodoFormPage from "../../pages/todos/TodoFormPage";
 import TodoDetailPage from "../../pages/todos/TodoDetailPage";
+import Home from "../../pages/home/Home";
 
 export const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ export const router = createBrowserRouter([
     element: <App />,
     errorElement: <NotFound />,
     children: [
+      {
+        index: true,
+        element: <Home />,
+      },
       {
         path: "auth",
         element: <AuthLayout />,

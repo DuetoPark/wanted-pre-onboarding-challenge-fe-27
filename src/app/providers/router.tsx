@@ -10,6 +10,7 @@ import TodosLayout from "../../pages/todos/TodosLayout";
 import TodoFormPage from "../../pages/todos/TodoFormPage";
 import TodoDetailPage from "../../pages/todos/TodoDetailPage";
 import Home from "../../pages/home/Home";
+import Empty from "../../shared/components/ui/Empty";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,7 @@ export const router = createBrowserRouter([
         element: <TodosLayout />,
         loader: () => todosLoader(queryClient),
         children: [
+          { index: true, element: <Empty>항목을 선택해주세요.</Empty> },
           {
             path: "new",
             element: <TodoFormPage />,

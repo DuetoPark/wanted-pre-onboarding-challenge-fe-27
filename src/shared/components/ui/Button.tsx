@@ -57,16 +57,26 @@ const baseButtonStyle = css`
   border-radius: 4px;
   font-size: 14px;
   font-weight: 500;
+  transition: all 150ms ease-in-out;
 `;
 
 const buttonVariantStyle = {
   primary: css`
     background-color: #646cff;
     color: #fff;
+
+    &:hover {
+      background-color: #535bf2;
+    }
   `,
   secondary: css`
     border: 1px solid #646cff;
     color: #646cff;
+
+    &:hover {
+      border: 1px solid #535bf2;
+      color: #535bf2;
+    }
   `,
 };
 

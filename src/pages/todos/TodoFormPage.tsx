@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
-import { TODO_URL } from "../../features/todos/url";
+import { TODO_URL } from "../../features/todos/constants/url";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { todoMutations, todoQueries } from "../../features/todos/todosQuery";
 

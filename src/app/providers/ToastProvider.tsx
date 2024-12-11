@@ -19,11 +19,7 @@ export default function ToastProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [toastMessages, setToastMessages] = useState<IToastMessage[]>([
-    { id: "1231231231", message: "알림", type: "info" },
-    { id: "asdfasdfsadfadsf", message: "에러", type: "error" },
-    { id: "ㅁㄴㅇ4ㄹ4ㅁㄴㅇ4ㅁㄴㄹ4ㄴㅇ", message: "성공", type: "success" },
-  ]);
+  const [toastMessages, setToastMessages] = useState<IToastMessage[]>([]);
   const timeoutIds = useRef(new Set<NodeJS.Timeout>());
 
   useEffect(() => {

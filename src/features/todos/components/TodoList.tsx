@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { TODO_URL } from "../url";
+import { TODO_URL } from "../constants/url";
 import { todoQueries } from "../todosQuery";
 
 const TodoList = () => {

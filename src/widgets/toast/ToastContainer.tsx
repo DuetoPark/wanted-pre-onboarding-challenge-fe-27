@@ -20,7 +20,7 @@ export default ToastContainer;
 
 // styles
 const listStyle = css`
-  position: absolute;
+  position: fixed;
   left: 16px;
   bottom: 16px;
   display: flex;

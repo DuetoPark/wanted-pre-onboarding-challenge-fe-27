@@ -34,7 +34,7 @@ export default function ToastProvider({
   }, []);
 
   const showToast = useCallback(
-    (message: string, type: string) => {
+    (message: string, type: IToastMessage["type"]) => {
       // 동일한 메세지를 가진 토스트가 있는 경우
       if (toastMessages.some((toast) => toast.message === message)) return;
 

@@ -6,6 +6,6 @@ export interface IToastMessage {
 
 export interface IToastContext {
   toastMessages: IToastMessage[];
-  showToast: (message: string, type: string) => void;
+  showToast: (message: string, type: IToastMessage["type"]) => void;
   removeToast: (id: string) => void;
 }

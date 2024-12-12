@@ -23,7 +23,7 @@ const toastStyles = css`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 240px;
+  width: 280px;
   padding: 8px 16px;
   border-radius: 8px;
   font-size: 14px;

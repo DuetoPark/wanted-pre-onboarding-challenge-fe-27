@@ -49,10 +49,14 @@ const listStyle = css`
   gap: 4px;
   height: 40vh;
   margin: 8px 0;
-  overflow: auth;
+  overflow: auto;
 
   &::-webkit-scrollbar {
     display: none !important;
+  }
+
+  li {
+    flex-shrink: 0;
   }
 
   @media (min-width: 576px) {

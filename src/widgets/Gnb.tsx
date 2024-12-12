@@ -63,7 +63,7 @@ const gnbStyle = css`
   position: sticky;
   left: 0;
   top: 0;
-  border-bottom: 1px solid #aaa;
+  border-bottom: 1px solid #ddd;
   backdrop-filter: blur(5px);
   background-color: rgba(255, 255, 255, 0.24);
 `;

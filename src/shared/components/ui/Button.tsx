@@ -3,7 +3,7 @@ import { ButtonHTMLAttributes } from "react";
 import { Link } from "react-router-dom";
 
 interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant: "primary" | "secondary";
+  variant?: "primary" | "secondary";
   size?: "small" | "medium" | "large";
   asChild?: boolean;
   to?: string;
@@ -11,7 +11,7 @@ interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const Button = ({
-  variant,
+  variant = "primary",
   size = "medium",
   asChild,
   to,
@@ -35,6 +35,7 @@ const Button = ({
 
   return (
     <button
+      type="button"
       css={[
         baseButtonStyle,
         buttonVariantStyle[variant],
@@ -53,6 +54,7 @@ export default Button;
 const baseButtonStyle = css`
   display: flex;
   align-items: center;
+  justify-content: center;
   column-gap: 4px;
   border-radius: 4px;
   font-size: 14px;

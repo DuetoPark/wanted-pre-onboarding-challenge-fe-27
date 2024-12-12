@@ -1,6 +1,6 @@
 import { axiosRequest } from "../../../shared/axios/request";
 import { formatDate, formatTime } from "../../../shared/utils/date";
-import type { TodoPayloadType, TodoType } from "../type";
+import type { TodoPayloadType, TodoType } from "../todo";
 
 export const getTodos = async () => {
   return await axiosRequest.get<TodoType[]>("/todos");

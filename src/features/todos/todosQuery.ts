@@ -6,7 +6,7 @@ import {
   getTodos,
   updateTodo,
 } from "./apis/todo";
-import type { TodoPayloadType } from "./type";
+import type { TodoPayloadType } from "./todo";
 
 export const todoQueries = {
   all: () => ["todos"] as const,

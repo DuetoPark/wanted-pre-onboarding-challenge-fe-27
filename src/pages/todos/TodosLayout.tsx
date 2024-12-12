@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import { css } from "@emotion/react";
 import Layout from "../../shared/components/layout/Layout";
 import TodoListSection from "../../features/todos/components/listSection/TodoListSection";
+import Section from "../../shared/components/layout/Section";
 
 const TodosLayout = () => {
   return (
@@ -10,7 +11,10 @@ const TodosLayout = () => {
 
       <div css={contentStyle}>
         <TodoListSection />
-        <Outlet />
+
+        <Section css={sectionStyle}>
+          <Outlet />
+        </Section>
       </div>
     </Layout>
   );
@@ -28,4 +32,11 @@ const contentStyle = css`
   @media (min-width: 576px) {
     grid-template-columns: 1fr 2fr;
   }
+`;
+
+// styles
+const sectionStyle = css`
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 16px;
 `;

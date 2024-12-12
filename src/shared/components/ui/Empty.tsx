@@ -22,6 +22,4 @@ const emptyStyle = css`
   font-size: 13px;
   font-weight: 500;
   color: #555;
-  border: 1px solid #ddd;
-  border-radius: 16px;
 `;

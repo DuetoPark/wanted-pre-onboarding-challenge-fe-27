@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import Gnb from "../widgets/Gnb";
-import ToastContainer from "../widgets/toast/ToastContainer";
+import Gnb from "../components/layout/header/Gnb";
+import ToastContainer from "../components/ui/toast/ToastContainer";
 
 function App() {
   return (

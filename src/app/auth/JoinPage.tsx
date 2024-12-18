@@ -24,9 +24,12 @@ const JoinPage = () => {
     setErrorMessage(message);
   }, []);
 
-  const onJoin = useCallback(({ email, password }: AuthPayloadType) => {
-    join({ email, password });
-  }, []);
+  const onJoin = useCallback(
+    ({ email, password }: AuthPayloadType) => {
+      join({ email, password });
+    },
+    [join]
+  );
 
   return (
     <section>

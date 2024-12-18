@@ -3,7 +3,7 @@ import ModalClose from "./ModalClose";
 import ModalTrigger from "./ModalTrigger";
 import ModalPortal from "./ModalPortal";
 import ModalContent from "./ModalContent";
-import ModalProvider from "./providers/ModalProvider";
+import { ModalProvider } from "../../../providers/ModalProvider";
 
 /**
  * 

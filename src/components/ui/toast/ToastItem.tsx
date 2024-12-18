@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { IoMdClose } from "react-icons/io";
-import { useToastContext } from "../../app/providers/ToastProvider";
+import { useToastContext } from "../../../providers/ToastProvider";
 import { type IToastMessage } from "./toast";
 
 const ToastItem = ({ id, message, type }: IToastMessage) => {

@@ -3,8 +3,8 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import { RouterProvider } from "react-router-dom";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { Providers } from "./providers";
-import { router } from "./providers/router";
+import { Providers } from "../providers";
+import { router } from "./router";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

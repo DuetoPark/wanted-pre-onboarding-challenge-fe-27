@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
-import Layout from "../../shared/components/layout/Layout";
-import Tag from "../../shared/components/ui/Tag";
+import Layout from "../../components/layout/Layout";
+import Tag from "../../components/ui/Tag";
 
 const Home = () => {
   return (

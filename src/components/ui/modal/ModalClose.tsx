@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useModalContext } from "./providers/ModalProvider";
+import { useModalContext } from "../../../providers/ModalProvider";
 import { IDefaultModalProps } from "./modal";
 
 interface IModalCloseProps extends IDefaultModalProps {

@@ -1,5 +1,5 @@
 import { createPortal } from "react-dom";
-import { useModalContext } from "./providers/ModalProvider";
+import { useModalContext } from "../../../providers/ModalProvider";
 import { IDefaultModalProps } from "./modal";
 const MODAL_ROOT = document.getElementById("modal-root");
 

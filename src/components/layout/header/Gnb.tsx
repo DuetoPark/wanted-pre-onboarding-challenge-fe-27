@@ -1,13 +1,13 @@
 import { useEffect } from "react";
-import { logout } from "../features/auth/apis/auth";
-import { useAuthStore } from "../features/auth/store/authStore";
-import { AUTH_URL } from "../features/auth/constants/url";
+import { logout } from "../../../features/auth/apis/auth";
+import { useAuthStore } from "../../../features/auth/store/authStore";
+import { AUTH_URL } from "../../../features/auth/constants/url";
 import { css } from "@emotion/react";
-import Logo from "../shared/components/ui/Logo";
-import ServiceMenu from "../shared/components/ui/ServiceMenu";
-import AuthMenu from "../shared/components/ui/AuthMenu";
-import Button from "../shared/components/ui/Button";
-import Layout from "../shared/components/layout/Layout";
+import Logo from "../../ui/Logo";
+import ServiceMenu from "../../ui/ServiceMenu";
+import AuthMenu from "../../ui/AuthMenu";
+import Button from "../../ui/Button";
+import Layout from "../Layout";
 
 const Gnb = () => {
   const { token, setToken } = useAuthStore();

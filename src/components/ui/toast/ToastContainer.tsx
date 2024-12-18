@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { useToastContext } from "../../app/providers/ToastProvider";
+import { useToastContext } from "../../../providers/ToastProvider";
 import ToastItem from "./ToastItem";
 
 const ToastContainer = () => {

@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import TodoList from "./TodoList";
-import Section from "../../../../shared/components/layout/Section";
+import Section from "../../../../components/layout/Section";
 import TodoListTitle from "./TodoListTitle";
 
 const TodoListSection = () => {

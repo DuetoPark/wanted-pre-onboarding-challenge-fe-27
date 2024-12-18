@@ -1,6 +1,6 @@
 import { useTodoForm } from "../../hooks/useTodoForm";
-import TextInputField from "../../../../shared/components/ui/TextInputField";
-import Button from "../../../../shared/components/ui/Button";
+import TextInputField from "../../../../components/ui/TextInputField";
+import Button from "../../../../components/ui/Button";
 import EditButtonsWrapper from "../EditButtonsWrapper";
 
 const TodoForm = () => {

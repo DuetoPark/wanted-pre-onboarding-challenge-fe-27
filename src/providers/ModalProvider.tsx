@@ -5,15 +5,11 @@ import {
   useEffect,
   useState,
 } from "react";
-import { IModalContext } from "../modal";
+import { IModalContext } from "../components/ui/modal/modal";
 
 const ModalContext = createContext<IModalContext | null>(null);
 
-export default function ModalProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export function ModalProvider({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const closeModal = useCallback(() => {

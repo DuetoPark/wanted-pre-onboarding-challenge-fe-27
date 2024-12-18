@@ -17,19 +17,25 @@ const LoginPage = () => {
     onError: (error) => showError(error),
   });
 
-  const saveTokenAndSetToken = useCallback((data: AuthType) => {
-    saveToken(data.token);
-    setToken(data.token);
-  }, []);
+  const saveTokenAndSetToken = useCallback(
+    (data: AuthType) => {
+      saveToken(data.token);
+      setToken(data.token);
+    },
+    [setToken]
+  );
 
   const showError = useCallback((error: unknown) => {
     const message = error?.response?.data?.details || "로그인에 실패했습니다";
     setErrorMessage(message);
   }, []);
 
-  const onLogin = useCallback(({ email, password }: AuthPayloadType) => {
-    login({ email, password });
-  }, []);
+  const onLogin = useCallback(
+    ({ email, password }: AuthPayloadType) => {
+      login({ email, password });
+    },
+    [login]
+  );
 
   return (
     <section>

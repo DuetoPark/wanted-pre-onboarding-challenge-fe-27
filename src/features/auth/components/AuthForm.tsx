@@ -18,10 +18,13 @@ const AuthForm = ({ submitText, errorMessage, onPermit }: IAuthFormProps) => {
     formState: { errors, isValid, isSubmitting },
   } = useForm<AuthPayloadType>({ resolver: zodResolver(authSchema) });
 
-  const onSubmit = useCallback((formData: AuthPayloadType) => {
-    onPermit(formData);
-    reset();
-  }, []);
+  const onSubmit = useCallback(
+    (formData: AuthPayloadType) => {
+      onPermit(formData);
+      reset();
+    },
+    [onPermit, reset]
+  );
 
   return (
     <form onSubmit={handleSubmit((formData) => onSubmit(formData))}>

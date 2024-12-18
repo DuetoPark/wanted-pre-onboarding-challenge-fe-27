@@ -2,8 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { css } from "@emotion/react";
 import { GoPlus } from "react-icons/go";
 import { TODO_URL } from "../../constants/url";
-import Section from "../../../../shared/components/layout/Section";
-import Button from "../../../../shared/components/ui/Button";
+import Section from "../../../../components/layout/Section";
+import Button from "../../../../components/ui/Button";
 
 const TodoListTitle = () => {
   const navigate = useNavigate();

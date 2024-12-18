@@ -10,15 +10,11 @@ import { v4 as uuidv4 } from "uuid";
 import {
   type IToastContext,
   type IToastMessage,
-} from "../../widgets/toast/toast";
+} from "../components/ui/toast/toast";
 
 const ToastContext = createContext<IToastContext | null>(null);
 
-export default function ToastProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export function ToastProvider({ children }: { children: React.ReactNode }) {
   const [toastMessages, setToastMessages] = useState<IToastMessage[]>([]);
   const timeoutIds = useRef(new Set<NodeJS.Timeout>());
 

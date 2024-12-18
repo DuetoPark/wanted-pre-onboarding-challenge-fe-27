@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import Section from "../../shared/components/layout/Section";
+import Section from "../../components/layout/Section";
 import TodoForm from "../../features/todos/components/formSection/TodoForm";
 
 const TodoFormPage = () => {

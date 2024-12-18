@@ -1,4 +1,4 @@
-import Section from "../../shared/components/layout/Section";
+import Section from "../../components/layout/Section";
 import TodoDetail from "../../features/todos/components/detailSection/TodoDetail";
 
 const TodoDetailPage = () => {

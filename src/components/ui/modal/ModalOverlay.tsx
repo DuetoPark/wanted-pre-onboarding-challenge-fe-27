@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { useModalContext } from "./providers/ModalProvider";
+import { useModalContext } from "../../../providers/ModalProvider";
 import { useCallback } from "react";
 
 interface IModalOverlayProps {

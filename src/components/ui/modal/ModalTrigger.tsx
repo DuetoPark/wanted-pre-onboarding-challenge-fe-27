@@ -1,4 +1,4 @@
-import { useModalContext } from "./providers/ModalProvider";
+import { useModalContext } from "../../../providers/ModalProvider";
 import { IDefaultModalProps } from "./modal";
 
 const ModalTrigger = ({ children, className }: IDefaultModalProps) => {

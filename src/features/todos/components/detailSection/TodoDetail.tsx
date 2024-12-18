@@ -2,11 +2,11 @@ import { css } from "@emotion/react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { todoMutations, todoQueries } from "../../todosQuery";
 import { useNavigate, useParams } from "react-router-dom";
-import Hr from "../../../../shared/components/ui/Hr";
-import Button from "../../../../shared/components/ui/Button";
+import Hr from "../../../../components/ui/Hr";
+import Button from "../../../../components/ui/Button";
 import { useCallback } from "react";
 import { TODO_URL } from "../../constants/url";
-import { useToastContext } from "../../../../app/providers/ToastProvider";
+import { useToastContext } from "../../../../providers/ToastProvider";
 import EditButtonsWrapper from "../EditButtonsWrapper";
 
 const TodoDetail = () => {

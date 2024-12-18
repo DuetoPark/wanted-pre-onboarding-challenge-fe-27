@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { TodoPayloadType } from "../todo";
 import { todoMutations, todoQueries } from "../todosQuery";
 import { TODO_URL } from "../constants/url";
-import { useToastContext } from "../../../app/providers/ToastProvider";
+import { useToastContext } from "../../../providers/ToastProvider";
 
 const EMPTY_STRING = "";
 const INIT_FORM = { title: EMPTY_STRING, content: EMPTY_STRING };
@@ -88,7 +88,7 @@ export const useTodoForm = () => {
 
   const cancel = useCallback(() => {
     navigate(TODO_URL.HOME);
-  }, []);
+  }, [navigate]);
 
   return {
     formState,

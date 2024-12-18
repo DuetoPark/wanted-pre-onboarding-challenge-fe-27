@@ -6,7 +6,7 @@ const MODAL_ROOT = document.getElementById("modal-root");
 const ModalPortal = ({ children }: IDefaultModalProps) => {
   const { isOpen } = useModalContext();
 
-  return <>{isOpen && createPortal(children, MODAL_ROOT || document.body)}</>;
+  return isOpen ? createPortal(children, MODAL_ROOT || document.body) : null;
 };
 
 export default ModalPortal;

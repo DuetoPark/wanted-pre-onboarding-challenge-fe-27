@@ -18,6 +18,7 @@ const hrStyle = css`
   color: #ddd;
   background-color: #ddd;
   border: 0;
+  width: 100%;
 `;
 
 const hrThicknessStyle = {

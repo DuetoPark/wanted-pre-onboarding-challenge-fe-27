@@ -30,7 +30,7 @@ const tagColorStyle = {
     color: black;
   `,
   gray: css`
-    backgound-color: lightgray;
+    background-color: lightgray;
     color: black;
   `,
 };

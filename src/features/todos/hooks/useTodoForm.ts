@@ -7,7 +7,13 @@ import { TODO_URL } from "../constants/url";
 import { useToastContext } from "../../../providers/ToastProvider";
 
 const EMPTY_STRING = "";
-const INIT_FORM = { title: EMPTY_STRING, content: EMPTY_STRING };
+const PRIORITY_INIT = "normal";
+
+const INIT_FORM: TodoPayloadType = {
+  title: EMPTY_STRING,
+  content: EMPTY_STRING,
+  priority: PRIORITY_INIT,
+};
 
 export const useTodoForm = () => {
   const navigate = useNavigate();
@@ -47,6 +53,7 @@ export const useTodoForm = () => {
       setFormState({
         title: todoDetail?.title || EMPTY_STRING,
         content: todoDetail?.content || EMPTY_STRING,
+        priority: todoDetail?.priority || PRIORITY_INIT,
       });
     },
     [todoDetail]
@@ -59,7 +66,7 @@ export const useTodoForm = () => {
   }, []);
 
   const validateForm = useCallback(() => {
-    const { title, content } = formState;
+    const { title, content, priority } = formState;
 
     if (isEmpty(title)) {
       focusElem(titleRef);
@@ -77,12 +84,12 @@ export const useTodoForm = () => {
   const handleSubmit = useCallback(() => {
     if (!validateForm()) return;
 
-    const { title, content } = formState;
+    const { title, content, priority } = formState;
 
     if (todoId) {
-      updateTodo({ id: todoId, payload: { title, content } });
+      updateTodo({ id: todoId, payload: { title, content, priority } });
     } else {
-      createTodo({ title, content });
+      createTodo({ title, content, priority });
     }
   }, [createTodo, formState, todoId, updateTodo, validateForm]);
 

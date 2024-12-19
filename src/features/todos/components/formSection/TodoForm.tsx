@@ -1,7 +1,9 @@
 import { useTodoForm } from "../../hooks/useTodoForm";
-import TextInputField from "../../../../components/ui/TextInputField";
+import TextInputField from "../../../../components/ui/form/TextInputField";
 import Button from "../../../../components/ui/Button";
 import EditButtonsWrapper from "../EditButtonsWrapper";
+import { PRIORITY_RADIO_FIELD } from "../../constants/todos";
+import RadioInputField from "../../../../components/ui/form/RadioInputField";
 
 const TodoForm = () => {
   const {
@@ -31,6 +33,14 @@ const TodoForm = () => {
         label="내용"
         placeholder="내용을 입력하세요"
         onInput={handleChange}
+      />
+
+      <RadioInputField
+        name="priority"
+        radioFields={PRIORITY_RADIO_FIELD}
+        checkedValue={formState.priority}
+        onChange={handleChange}
+        label="긴급도"
       />
 
       <EditButtonsWrapper>

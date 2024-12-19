@@ -1,7 +1,6 @@
 import { css } from "@emotion/react";
-import { forwardRef, InputHTMLAttributes } from "react";
-
-type TInputAttrType = InputHTMLAttributes<HTMLInputElement>;
+import { forwardRef } from "react";
+import type { TInputAttrType } from "./form";
 
 interface ITextInputFieldProps extends Omit<TInputAttrType, "name"> {
   name: string;

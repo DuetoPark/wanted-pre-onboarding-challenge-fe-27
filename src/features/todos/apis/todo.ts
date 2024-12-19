@@ -1,5 +1,6 @@
 import { axiosRequest } from "../../../shared/axios/request";
 import { formatDate, formatTime } from "../../../shared/utils/date";
+import { PRIORITY_TEXT } from "../constants/todos";
 import type { TodoPayloadType, TodoType } from "../todo";
 
 export const getTodos = async () => {
@@ -15,6 +16,7 @@ export const getTodoById = async (todoId?: string) => {
       ...res,
       createdAt: `${formatDate(res.createdAt)} ${formatTime(res.createdAt)}`,
       updatedAt: `${formatDate(res.updatedAt)} ${formatTime(res.updatedAt)}`,
+      priorityText: PRIORITY_TEXT[res.priority],
     }));
 };
 

@@ -8,6 +8,7 @@ import { useCallback } from "react";
 import { TODO_URL } from "../../constants/url";
 import { useToastContext } from "../../../../providers/ToastProvider";
 import EditButtonsWrapper from "../EditButtonsWrapper";
+import Tag from "../../../../components/ui/Tag";
 
 const TodoDetail = () => {
   const navigate = useNavigate();
@@ -49,7 +50,12 @@ const TodoDetail = () => {
   return (
     <article css={articleStyle}>
       <header css={headerStyle}>
-        <h4 css={titleStyle}>{todoDetail.title}</h4>
+        <h4 css={titleStyle}>
+          <Tag css={tagStyle} color="gold">
+            {todoDetail.priorityText}
+          </Tag>
+          {todoDetail.title}
+        </h4>
 
         <div css={timeStyle}>
           <p>{todoDetail.createdAt} 작성</p>
@@ -91,7 +97,14 @@ const headerStyle = css`
   padding-bottom: 8px;
 `;
 
+const tagStyle = css`
+  font-size: 12px;
+`;
+
 const titleStyle = css`
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
   font-size: 18px;
   font-weight: 700;
   color: #646cff;

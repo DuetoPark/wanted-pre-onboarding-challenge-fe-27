@@ -8,7 +8,7 @@ import { useCallback } from "react";
 import { TODO_URL } from "../../constants/url";
 import { useToastContext } from "../../../../providers/ToastProvider";
 import EditButtonsWrapper from "../EditButtonsWrapper";
-import Tag from "../../../../components/ui/Tag";
+import PriorityTag from "../PriorityTag";
 
 const TodoDetail = () => {
   const navigate = useNavigate();
@@ -51,9 +51,9 @@ const TodoDetail = () => {
     <article css={articleStyle}>
       <header css={headerStyle}>
         <h4 css={titleStyle}>
-          <Tag css={tagStyle} color="gold">
+          <PriorityTag priority={todoDetail.priority}>
             {todoDetail.priorityText}
-          </Tag>
+          </PriorityTag>
           {todoDetail.title}
         </h4>
 
@@ -95,10 +95,6 @@ const articleStyle = css`
 
 const headerStyle = css`
   padding-bottom: 8px;
-`;
-
-const tagStyle = css`
-  font-size: 12px;
 `;
 
 const titleStyle = css`

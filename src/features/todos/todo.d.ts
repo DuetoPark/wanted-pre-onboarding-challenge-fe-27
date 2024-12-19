@@ -1,4 +1,8 @@
-export type PriorityType = "urgent" | "normal" | "low";
+import { PRIORITY_TEXT } from "./constants/todos";
+
+export type PriorityType = keyof typeof PRIORITY_TEXT;
+export type PriorityTextType =
+  (typeof PRIORITY_TEXT)[keyof typeof PRIORITY_TEXT];
 
 export interface TodoType {
   title: string;
@@ -7,6 +11,7 @@ export interface TodoType {
   createdAt: string;
   updatedAt: string;
   priority: PriorityType;
+  PriorityText: PriorityTextType;
 }
 
 export interface TodoPayloadType {

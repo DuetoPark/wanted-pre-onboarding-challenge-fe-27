@@ -1,12 +1,23 @@
 import { css } from "@emotion/react";
 
 export interface ITagProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   color: keyof typeof tagColorStyle;
+  label?: string;
   className?: string;
 }
 
-const Tag = ({ children, color, className }: ITagProps) => {
+const BaseTag = ({ children, color, label, className }: ITagProps) => {
+  if (label) {
+    return (
+      <strong
+        css={[baseTagStyle, tagColorStyle[color]]}
+        className={className}
+        aria-label={label}
+      ></strong>
+    );
+  }
+
   return (
     <strong css={[baseTagStyle, tagColorStyle[color]]} className={className}>
       {children}
@@ -14,7 +25,7 @@ const Tag = ({ children, color, className }: ITagProps) => {
   );
 };
 
-export default Tag;
+export default BaseTag;
 
 const baseTagStyle = css`
   display: inline-block;
@@ -32,5 +43,13 @@ const tagColorStyle = {
   gray: css`
     background-color: lightgray;
     color: black;
+  `,
+  brand: css`
+    background-color: #646cff;
+    color: white;
+  `,
+  red: css`
+    background-color: tomato;
+    color: white;
   `,
 };

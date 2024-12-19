@@ -1,16 +1,26 @@
 import { ButtonHTMLAttributes } from "react";
 import { useLocation } from "react-router-dom";
-import classNames from "classnames";
 import { css } from "@emotion/react";
+import classNames from "classnames";
+import PriorityTag from "../PriorityTag";
+import type { PriorityTextType, PriorityType } from "../../todo";
 
 type ButtonAttrProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
 interface ITodoItem extends Omit<ButtonAttrProps, "id" | "title"> {
   id: string;
   title: string;
+  priority: PriorityType;
+  priorityText: PriorityTextType;
 }
 
-const TodoItem = ({ id, title, onClick }: ITodoItem) => {
+const TodoItem = ({
+  id,
+  title,
+  priority,
+  priorityText,
+  onClick,
+}: ITodoItem) => {
   const pathname = useLocation().pathname;
 
   return (
@@ -19,7 +29,7 @@ const TodoItem = ({ id, title, onClick }: ITodoItem) => {
       className={classNames(pathname.includes(id) && "active")}
     >
       <button css={buttonStyle} onClick={onClick}>
-        {title}
+        {title} <PriorityTag priority={priority} label={priorityText} />
       </button>
     </li>
   );

@@ -4,7 +4,14 @@ import { PRIORITY_TEXT } from "../constants/todos";
 import type { TodoPayloadType, TodoType } from "../todo";
 
 export const getTodos = async () => {
-  return await axiosRequest.get<TodoType[]>("/todos");
+  return await axiosRequest
+    .get<TodoType[]>("/todos") //
+    .then((res) =>
+      res.map((item) => ({
+        ...item,
+        priorityText: PRIORITY_TEXT[item.priority],
+      }))
+    );
 };
 
 export const getTodoById = async (todoId?: string) => {

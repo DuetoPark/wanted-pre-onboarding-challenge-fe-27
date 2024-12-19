@@ -33,6 +33,8 @@ const TodoList = () => {
           key={todo.id}
           id={todo.id}
           title={todo.title}
+          priority={todo.priority}
+          priorityText={todo.priorityText}
           onClick={() => goToDetail(todo.id)}
         />
       ))}

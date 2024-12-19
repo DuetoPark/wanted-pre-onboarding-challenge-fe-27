@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import Layout from "../../components/layout/Layout";
-import Tag from "../../components/ui/Tag";
+import BaseTag from "../../components/ui/tag/BaseTag";
 
 const Home = () => {
   return (
@@ -9,8 +9,8 @@ const Home = () => {
         <h2>🔥어서오세용🔥</h2>
         <p>
           여기는
-          <Tag color="gold">멋진 프론트엔드 개발자 박인혜</Tag>가 만든
-          <Tag color="gold">투두 리스트 페이지</Tag>
+          <BaseTag color="gold">멋진 프론트엔드 개발자 박인혜</BaseTag>가 만든
+          <BaseTag color="gold">투두 리스트 페이지</BaseTag>
           입니다.
         </p>
         <p>기다리고 있었습니다. 극진히 모시겠습니다.</p>

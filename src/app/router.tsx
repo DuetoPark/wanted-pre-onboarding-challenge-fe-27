@@ -12,44 +12,55 @@ import TodoDetailPage from "./todos/TodoDetailPage";
 import Home from "./home/Home";
 import Empty from "../components/ui/Empty";
 
-export const router = createBrowserRouter([
+export const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <App />,
+      errorElement: <NotFound />,
+      children: [
+        {
+          index: true,
+          element: <Home />,
+        },
+        {
+          path: "auth",
+          element: <AuthLayout />,
+          children: [
+            { index: true, element: <LoginPage /> },
+            { path: "join", element: <JoinPage /> },
+          ],
+        },
+        {
+          path: "todo",
+          element: <TodosLayout />,
+          loader: () => todosLoader(queryClient),
+          children: [
+            { index: true, element: <Empty>항목을 선택해주세요.</Empty> },
+            {
+              path: "new",
+              element: <TodoFormPage />,
+            },
+            {
+              path: ":todoId",
+              element: <TodoDetailPage />,
+            },
+            {
+              path: ":todoId/modify",
+              element: <TodoFormPage />,
+            },
+          ],
+        },
+      ],
+    },
+  ],
   {
-    path: "/",
-    element: <App />,
-    errorElement: <NotFound />,
-    children: [
-      {
-        index: true,
-        element: <Home />,
-      },
-      {
-        path: "auth",
-        element: <AuthLayout />,
-        children: [
-          { index: true, element: <LoginPage /> },
-          { path: "join", element: <JoinPage /> },
-        ],
-      },
-      {
-        path: "todo",
-        element: <TodosLayout />,
-        loader: () => todosLoader(queryClient),
-        children: [
-          { index: true, element: <Empty>항목을 선택해주세요.</Empty> },
-          {
-            path: "new",
-            element: <TodoFormPage />,
-          },
-          {
-            path: ":todoId",
-            element: <TodoDetailPage />,
-          },
-          {
-            path: ":todoId/modify",
-            element: <TodoFormPage />,
-          },
-        ],
-      },
-    ],
-  },
-]);
+    future: {
+      v7_fetcherPersist: true,
+      v7_normalizeFormMethod: true,
+      v7_partialHydration: true,
+      v7_relativeSplatPath: true,
+      v7_skipActionErrorRevalidation: true,
+    },
+  }
+);

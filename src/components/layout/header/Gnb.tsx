@@ -6,7 +6,7 @@ import { css } from "@emotion/react";
 import Logo from "../../ui/Logo";
 import ServiceMenu from "../../ui/ServiceMenu";
 import AuthMenu from "../../ui/AuthMenu";
-import Button from "../../ui/Button";
+import Button from "../../ui/button/BaseButton";
 import Layout from "../Layout";
 
 const Gnb = () => {

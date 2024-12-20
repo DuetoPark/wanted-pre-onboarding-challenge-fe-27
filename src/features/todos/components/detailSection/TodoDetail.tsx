@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { todoMutations, todoQueries } from "../../todosQuery";
 import { useNavigate, useParams } from "react-router-dom";
 import Hr from "../../../../components/ui/Hr";
-import Button from "../../../../components/ui/Button";
+import Button from "../../../../components/ui/button/BaseButton";
 import { useCallback } from "react";
 import { TODO_URL } from "../../constants/url";
 import { useToastContext } from "../../../../providers/ToastProvider";

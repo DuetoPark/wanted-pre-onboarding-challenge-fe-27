@@ -1,11 +1,30 @@
 import { css } from "@emotion/react";
 import type { IRadioField, TInputAttrType } from "./form";
 
+/**
+ * 
+ * RadioInputField 컴포넌트
+ * 
+ * 특징
+ * 1. 재사용성: state가 없는 Presentational UI
+ * 2. 유연한 타입: value type에 제너럴을 설정해서 타입 안정성과 유연성을 높임
+ * 
+ * 사용 예시
+ * <RadioInputField
+    name="priority"
+    radioFields={PRIORITY_RADIO_FIELD}
+    checkedValue={formState.priority}
+    onChange={handleChange}
+    label="긴급도"
+  />
+ */
+
 interface IRadioInputFieldProps<T> extends Omit<TInputAttrType, "name"> {
   radioFields: IRadioField<T>[];
   name: string;
   checkedValue: T;
   label: string;
+  className?: string;
 }
 
 const RadioInputField = <T,>({
@@ -13,26 +32,29 @@ const RadioInputField = <T,>({
   name,
   checkedValue,
   label,
+  className,
   ...props
 }: IRadioInputFieldProps<T>) => {
   return (
     <article css={fieldStyle}>
       <h5 css={titleStyle}>{label}</h5>
 
-      {radioFields.map(({ value, text }, i) => (
-        <div css={[radioStyle, checkedStyle]} key={String(value)}>
-          <input
-            className="visually-hidden"
-            type="radio"
-            id={`${name}-${i}`}
-            name={name}
-            value={String(value)}
-            checked={checkedValue === value}
-            {...props}
-          />
-          <label htmlFor={`${name}-${i}`}>{text}</label>
-        </div>
-      ))}
+      <div className={className}>
+        {radioFields.map(({ value, text }, i) => (
+          <div css={[radioStyle, checkedStyle]} key={String(value)}>
+            <input
+              className="visually-hidden"
+              type="radio"
+              id={`${name}-${i}`}
+              name={name}
+              value={String(value)}
+              checked={checkedValue === value}
+              {...props}
+            />
+            <label htmlFor={`${name}-${i}`}>{text}</label>
+          </div>
+        ))}
+      </div>
     </article>
   );
 };

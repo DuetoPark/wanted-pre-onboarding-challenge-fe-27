@@ -1,8 +1,8 @@
 import { css } from "@emotion/react";
-import { ButtonHTMLAttributes } from "react";
 import { Link } from "react-router-dom";
+import type { ButtonAttrType } from "./button";
 
-interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface IButtonProps extends ButtonAttrType {
   variant?: "primary" | "secondary";
   size?: "small" | "medium" | "large";
   asChild?: boolean;

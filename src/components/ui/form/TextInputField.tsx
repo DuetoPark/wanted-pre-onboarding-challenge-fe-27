@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import { forwardRef } from "react";
 import type { TInputAttrType } from "./form";
+import Input from "./Input";
 
 interface ITextInputFieldProps extends Omit<TInputAttrType, "name"> {
   name: string;
@@ -14,14 +15,7 @@ const TextInputField = forwardRef<HTMLInputElement, ITextInputFieldProps>(
         <label css={labelStyle} htmlFor={name}>
           {label}
         </label>
-        <input
-          css={inputStyle}
-          type="text"
-          ref={ref}
-          name={name}
-          id={name}
-          {...props}
-        />
+        <Input ref={ref} name={name} id={name} {...props} />
       </div>
     );
   }

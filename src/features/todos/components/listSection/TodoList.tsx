@@ -1,29 +1,32 @@
-import { useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
 import { css } from "@emotion/react";
-import { TODO_URL } from "../../constants/url";
-import { todoQueries } from "../../todosQuery";
 import TodoItem from "./TodoItem";
+import { TodoType } from "../../todo";
 
-const TodoList = () => {
-  const {
-    data: todos,
-    isLoading,
-    isError,
-    error,
-  } = useQuery(todoQueries.list());
-  const navigate = useNavigate();
+export interface ITodoListProps {
+  todos?: TodoType[];
+  isLoading: boolean;
+  isError: boolean;
+  error: Error | null;
+  onClick: (id: string) => void;
+}
 
+const TodoList = ({
+  isLoading,
+  isError,
+  error,
+  todos,
+  onClick,
+}: ITodoListProps) => {
   if (isLoading) {
     return <p>Loading...</p>;
   }
 
   if (isError) {
-    return <p>Error: {error.message}</p>;
+    return <p>Error: {error?.message}</p>;
   }
 
-  const goToDetail = (id: string) => {
-    navigate(TODO_URL.DETAIL(id));
+  const handleClick = (id: string) => {
+    onClick(id);
   };
 
   return (
@@ -35,7 +38,7 @@ const TodoList = () => {
           title={todo.title}
           priority={todo.priority}
           priorityText={todo.priorityText}
-          onClick={() => goToDetail(todo.id)}
+          onClick={() => handleClick(todo.id)}
         />
       ))}
     </ol>

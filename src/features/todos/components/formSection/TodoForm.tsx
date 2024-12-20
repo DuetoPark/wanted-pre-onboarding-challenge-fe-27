@@ -1,6 +1,6 @@
 import { useTodoForm } from "../../hooks/useTodoForm";
 import TextInputField from "../../../../components/ui/form/TextInputField";
-import Button from "../../../../components/ui/Button";
+import Button from "../../../../components/ui/button/BaseButton";
 import EditButtonsWrapper from "../EditButtonsWrapper";
 import { PRIORITY_RADIO_FIELD } from "../../constants/todos";
 import RadioInputField from "../../../../components/ui/form/RadioInputField";

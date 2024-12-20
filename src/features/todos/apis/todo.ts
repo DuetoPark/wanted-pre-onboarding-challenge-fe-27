@@ -3,9 +3,9 @@ import { formatDate, formatTime } from "../../../shared/utils/date";
 import { PRIORITY_TEXT } from "../constants/todos";
 import type { TodoPayloadType, TodoType } from "../todo";
 
-export const getTodos = async () => {
+export const getTodos = async (queryString?: string | null) => {
   return await axiosRequest
-    .get<TodoType[]>("/todos") //
+    .get<TodoType[]>(`/todos${queryString || ""}`) //
     .then((res) =>
       res.map((item) => ({
         ...item,

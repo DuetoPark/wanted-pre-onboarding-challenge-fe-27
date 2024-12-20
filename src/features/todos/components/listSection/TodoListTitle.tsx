@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 import { GoPlus } from "react-icons/go";
 import { TODO_URL } from "../../constants/url";
 import Section from "../../../../components/layout/Section";
-import Button from "../../../../components/ui/Button";
+import Button from "../../../../components/ui/button/BaseButton";
 
 const TodoListTitle = () => {
   const navigate = useNavigate();

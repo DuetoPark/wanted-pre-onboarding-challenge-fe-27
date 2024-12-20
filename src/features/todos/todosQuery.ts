@@ -11,11 +11,12 @@ import type { TodoPayloadType } from "./todo";
 export const todoQueries = {
   all: () => ["todos"] as const,
   lists: () => [...todoQueries.all(), "list"] as const,
-  list: () =>
-    queryOptions({
-      queryKey: [...todoQueries.lists()],
-      queryFn: () => getTodos(),
-    }),
+  list: (queryString?: string | null) => {
+    return queryOptions({
+      queryKey: [...todoQueries.lists(), queryString],
+      queryFn: async () => getTodos(queryString),
+    });
+  },
 
   details: () => [...todoQueries.all(), "detail"] as const,
   detail: (id?: string) =>

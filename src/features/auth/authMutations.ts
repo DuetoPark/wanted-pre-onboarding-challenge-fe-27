@@ -1,5 +1,5 @@
+import { postLogin, postJoin } from "./apis/auth";
 import { AuthPayloadType } from "./types";
-import { postJoin, postLogin } from "./apis/auth";
 
 export const authMutations = {
   login: () => ({

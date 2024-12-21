@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { authMutations } from "../../features/auth/authQuery";
+import { authMutations } from "../../features/auth/authMutations";
 import { useAuthStore } from "../../features/auth/store/authStore";
 import { AUTH_URL } from "../../features/auth/constants/url";
 import AuthLink from "../../features/auth/components/AuthLink";
